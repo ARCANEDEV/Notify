@@ -99,7 +99,7 @@ class NotifyTest extends TestCase
         $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.title', 'Success Heading');
         $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.level', 'success');
 
-        $this->notify->success('You are now signed up.', 'Success Heading');
+        $this->notify->success('You are now signed up.');
     }
 
     /** @test */

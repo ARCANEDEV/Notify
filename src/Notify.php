@@ -117,7 +117,7 @@ class Notify
      */
     public function overlay($message, $title = 'Notice')
     {
-        $this->message($message, 'info', $title);
+        $this->message($message, 'info');
         $this->session->flash(self::SESSION_NAME . '.overlay', true);
         $this->session->flash(self::SESSION_NAME . '.title', $title);
 
