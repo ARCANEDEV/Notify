@@ -26,7 +26,7 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function boot()
     {
-        $this->package('arcanedev/notify', null, realpath(__DIR__ . '/..'));
+        $this->package('arcanedev/notify', null, realpath(__DIR__ . '/../..'));
     }
 
     /**
