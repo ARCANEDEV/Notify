@@ -1,0 +1,32 @@
+{
+    "name": "arcanedev/notify",
+    "description": "Easy notifications and flash messages Helper",
+    "keywords": ["notify", "flash", "helper", "laravel"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ARCANEDEV",
+            "homepage": "https://github.com/ARCANEDEV/Notify/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.4",
+        "phpunit/phpcov": "~2.0",
+        "mockery/mockery": "~0.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arcanedev\\Notify\\": "src/"
+        },
+        "files": ["src/helpers.php"]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Arcanedev\\Notify\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable"
+}
