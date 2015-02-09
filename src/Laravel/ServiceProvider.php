@@ -37,7 +37,7 @@ class ServiceProvider extends IlluminateServiceProvider
     public function register()
     {
         $this->app->bind(
-            'Arcanedev\Notify\SessionStore',
+            'Arcanedev\Notify\Contracts\SessionStoreContract',
             'Arcanedev\Notify\Laravel\SessionStore'
         );
 
