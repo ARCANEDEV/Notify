@@ -93,16 +93,6 @@ class NotifyTest extends TestCase
     }
 
     /** @test */
-    public function it_displays_custom_message_titles()
-    {
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.message', 'You are now signed up.');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.title', 'Success Heading');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.level', 'success');
-
-        $this->notify->success('You are now signed up.');
-    }
-
-    /** @test */
     public function it_displays_overlay_notifications()
     {
         $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.message', 'Overlay Message');
