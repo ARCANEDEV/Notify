@@ -65,13 +65,17 @@ You may also do:
 ```php
 // Info alert notification
 Notify::info('Message')
+
 // Success alert notification
 Notify::success('Message')
+
 // Danger alert notification
 Notify::error('Message')
+
 // Warning alert notification
 Notify::warning('Message')
-// Model notification
+
+// Modal notification
 Notify::overlay('Modal Message', 'Modal Title')
 ```
 
