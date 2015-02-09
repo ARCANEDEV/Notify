@@ -29,15 +29,107 @@ You can install the bindings via [Composer](http://getcomposer.org/). Add this t
 
 Then install it via `composer install` or `composer update`.
 
+### Laravel
+
+include the service provider within `app/config/app.php`.
+
+```php
+'providers' => [
+    'Arcanedev\Notify\Laravel\ServiceProvider'
+];
+```
+
+And add a facade alias to this same file at the bottom:
+
+```php
+'aliases' => [
+    'Notify' => 'Arcanedev\Notify\Laravel\Facade'
+];
+```
+
 ## USAGE
 
-Coming soon.
+Within your controllers, before you perform a redirect...
+
+```php
+public function store()
+{
+    Notify::message('Welcome !');
+
+    return Redirect::home();
+}
+```
+
+You may also do:
+
+```php
+// Info alert notification
+Notify::info('Message')
+// Success alert notification
+Notify::success('Message')
+// Danger alert notification
+Notify::error('Message')
+// Warning alert notification
+Notify::warning('Message')
+// Model notification
+Notify::overlay('Modal Message', 'Modal Title')
+```
+
+Again, if using Laravel, this will set a few keys in the session :
+
+  - `notifyer.message`: The message you're flashing
+  - `notifyer.level`: A string that represents the type of notification (good for applying HTML class names)
+
+Alternatively, again, if you're using Laravel, you may reference the `flash()` helper function, instead of the facade.
+
+Here's an example:
+
+```php
+/**
+ * Destroy the user's session (logout).
+ *
+ * @return Response
+ */
+public function destroy()
+{
+    Auth::logout();
+
+    flash()->success('You have been logged out.');
+
+    return home();
+}
+```
+
+Or, for a general information flash, just do: `flash('Some message');`.
+
+With this message flashed to the session, you may now display it in your view(s). Maybe something like:
+
+```html
+@if (Session::has('notifyer.message'))
+    <div class="alert alert-{{ Session::get('notifyer.level') }}">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+        {{ Session::get('notifyer.message') }}
+    </div>
+@endif
+```
+
+> Note that this package is optimized for use with Twitter Bootstrap.
+
+Because flash messages and overlays are so common, if you want, you may use (or modify) the views that are included with this package.
+
+Simply append to your layout view:
+
+```html
+@include('notify::message')
+```
 
 ### TODOS:
 
   - [ ] Documentation
   - [ ] Examples
-  - [ ] More tests and code coverage
+  - [x] Bootstrap 3 support
+  - [ ] Zurb Foundation 5 support
   - [x] Laravel 4 support 
   - [ ] Laravel 5 support 
   - [ ] Refactoring
