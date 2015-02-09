@@ -1,30 +1,9 @@
 <?php namespace Arcanedev\Notify\Tests\Laravel;
 
 use Arcanedev\Notify\Laravel\Facade as Notify;
-use Illuminate\Support\Facades\Session;
 
 class NotifyTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Properties
-     | ------------------------------------------------------------------------------------------------
-     */
-    const SESSION_NAME = 'notifyer';
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
-    public function tearDown()
-    {
-        parent::tearDown();
-    }
-
     /* ------------------------------------------------------------------------------------------------
      |  Test Functions
      | ------------------------------------------------------------------------------------------------
@@ -96,33 +75,5 @@ class NotifyTest extends TestCase
 
         $this->assertNotification($message);
         $this->assertTrue($this->getSession('important'));
-    }
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Assert Notification
-     *
-     * @param string $message
-     * @param string $level
-     */
-    private function assertNotification($message, $level = 'info')
-    {
-        $this->assertEquals($message, $this->getSession('message'));
-        $this->assertEquals($level, $this->getSession('level'));
-    }
-
-    /**
-     * Get session value
-     *
-     * @param  string $name
-     *
-     * @return mixed
-     */
-    private function getSession($name)
-    {
-        return Session::get(self::SESSION_NAME . '.' . $name);
     }
 }
