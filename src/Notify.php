@@ -5,6 +5,12 @@ use Arcanedev\Notify\Contracts\SessionStoreContract;
 class Notify
 {
     /* ------------------------------------------------------------------------------------------------
+     |  Constants
+     | ------------------------------------------------------------------------------------------------
+     */
+    const SESSION_NAME = 'notifyer';
+
+    /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
@@ -15,8 +21,6 @@ class Notify
      */
     private $session;
 
-    const SESSION_NAME = 'notifyer';
-
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
      | ------------------------------------------------------------------------------------------------
@@ -26,7 +30,7 @@ class Notify
      *
      * @param SessionStoreContract $session
      */
-    function __construct(SessionStoreContract $session)
+    public function __construct(SessionStoreContract $session)
     {
         $this->session = $session;
     }

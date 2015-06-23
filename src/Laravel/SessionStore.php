@@ -3,6 +3,10 @@
 use Arcanedev\Notify\Contracts\SessionStoreContract;
 use Illuminate\Session\Store;
 
+/**
+ * Class SessionStore
+ * @package Arcanedev\Notify\Laravel
+ */
 class SessionStore implements SessionStoreContract
 {
     /* ------------------------------------------------------------------------------------------------
@@ -31,8 +35,8 @@ class SessionStore implements SessionStoreContract
     /**
      * Flash a message to the session.
      *
-     * @param $name
-     * @param $data
+     * @param string $name
+     * @param mixed  $data
      */
     public function flash($name, $data)
     {

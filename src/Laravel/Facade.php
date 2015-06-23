@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Facade as IlluminateFacade;
 
+/**
+ * Class Facade
+ * @package Arcanedev\Notify\Laravel
+ */
 class Facade extends IlluminateFacade
 {
     /**

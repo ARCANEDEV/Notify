@@ -2,6 +2,10 @@
 
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 
+/**
+ * Class ServiceProvider
+ * @package Arcanedev\Notify\Laravel
+ */
 class ServiceProvider extends IlluminateServiceProvider
 {
     /* ------------------------------------------------------------------------------------------------
@@ -21,8 +25,6 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     /**
      * Bootstrap the application events.
-     *
-     * @return void
      */
     public function boot()
     {
@@ -31,18 +33,16 @@ class ServiceProvider extends IlluminateServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {
         $this->app->bind(
-            'Arcanedev\Notify\Contracts\SessionStoreContract',
-            'Arcanedev\Notify\Laravel\SessionStore'
+            'Arcanedev\\Notify\\Contracts\\SessionStoreContract',
+            'Arcanedev\\Notify\\Laravel\\SessionStore'
         );
 
         $this->app->bindShared('arcanedev.notify', function () {
-            return $this->app->make('Arcanedev\Notify\Notify');
+            return $this->app->make('Arcanedev\\Notify\\Notify');
         });
     }
 
@@ -52,7 +52,7 @@ class ServiceProvider extends IlluminateServiceProvider
      * @return array
      */
     public function provides()
-	{
+    {
         return ['arcanedev.notify'];
     }
 }

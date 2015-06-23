@@ -1,5 +1,9 @@
 <?php namespace Arcanedev\Notify\Contracts;
 
+/**
+ * Interface SessionStoreContract
+ * @package Arcanedev\Notify\Contracts
+ */
 interface SessionStoreContract
 {
     /* ------------------------------------------------------------------------------------------------
@@ -9,8 +13,8 @@ interface SessionStoreContract
     /**
      * Flash a message to the session.
      *
-     * @param $name
-     * @param $data
+     * @param string $name
+     * @param mixed  $data
      */
     public function flash($name, $data);
 }
