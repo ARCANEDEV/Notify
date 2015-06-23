@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Session;
 
-class TestCase extends \Orchestra\Testbench\TestCase
+abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
