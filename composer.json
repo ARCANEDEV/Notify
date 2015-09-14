@@ -6,16 +6,17 @@
     "authors": [
         {
             "name": "ARCANEDEV",
-            "homepage": "https://github.com/ARCANEDEV/Notify/contributors"
+            "email": "arcanedev.maroc@gmail.com",
+            "homepage": "https://github.com/ARCANEDEV"
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "arcanedev/support": "~1.0"
+        "php": ">=5.5.9",
+        "arcanedev/support": "~3.0"
     },
     "require-dev": {
-        "orchestra/testbench": "~2.2",
-        "phpunit/phpunit": "~4.7",
+        "orchestra/testbench": "~3.1",
+        "phpunit/phpunit": "~4.0",
         "phpunit/phpcov": "~2.0",
         "mockery/mockery": "~0.9"
     },
@@ -23,7 +24,7 @@
         "psr-4": {
             "Arcanedev\\Notify\\": "src/"
         },
-        "files": ["src/helpers.php"]
+        "files": ["helpers.php"]
     },
     "autoload-dev": {
         "psr-4": {
