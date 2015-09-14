@@ -1,15 +1,21 @@
-<?php namespace Arcanedev\Notify\Tests\Laravel;
+<?php namespace Arcanedev\Notify\Tests;
 
-use Arcanedev\Notify\Laravel\ServiceProvider;
+use Arcanedev\Notify\NotifyServiceProvider;
 
-class ServiceProviderTest extends TestCase
+/**
+ * Class     NotifyServiceProviderTest
+ *
+ * @package  Arcanedev\Notify\Tests
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
+class NotifyServiceProviderTest extends TestCase
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * @var ServiceProvider
+     * @var NotifyServiceProvider
      */
     private $serviceProvider;
 
@@ -21,7 +27,7 @@ class ServiceProviderTest extends TestCase
     {
         parent::setUp();
 
-        $this->serviceProvider = new ServiceProvider($this->app);
+        $this->serviceProvider = new NotifyServiceProvider($this->app);
     }
 
     public function tearDown()

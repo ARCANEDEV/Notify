@@ -1,6 +1,15 @@
-<?php namespace Arcanedev\Notify\Tests\Laravel;
+<?php namespace Arcanedev\Notify\Tests\Facades;
 
-class HelperTest extends TestCase
+use Arcanedev\Notify\Facades\Notify as Notify;
+use Arcanedev\Notify\Tests\TestCase;
+
+/**
+ * Class     NotifyTest
+ *
+ * @package  Arcanedev\Notify\Tests\Facades
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
+class NotifyTest extends TestCase
 {
     /* ------------------------------------------------------------------------------------------------
      |  Test Functions
@@ -11,7 +20,7 @@ class HelperTest extends TestCase
     {
         $message = 'Welcome Aboard';
 
-        notify($message);
+        Notify::message($message);
 
         $this->assertNotification($message);
     }
@@ -21,7 +30,7 @@ class HelperTest extends TestCase
     {
         $message = 'Welcome Aboard';
 
-        notify()->info($message);
+        Notify::info($message);
 
         $this->assertNotification($message, 'info');
     }
@@ -31,7 +40,7 @@ class HelperTest extends TestCase
     {
         $message = 'Welcome Aboard';
 
-        notify()->success($message);
+        Notify::success($message);
 
         $this->assertNotification($message, 'success');
     }
@@ -41,7 +50,7 @@ class HelperTest extends TestCase
     {
         $message = 'Uh Oh';
 
-        notify()->error($message);
+        Notify::error($message);
 
         $this->assertNotification($message, 'danger');
     }
@@ -50,7 +59,7 @@ class HelperTest extends TestCase
     public function it_displays_warning_notifications()
     {
         $message = 'Be careful!';
-        notify()->warning($message);
+        Notify::warning($message);
 
         $this->assertNotification($message, 'warning');
     }
@@ -59,7 +68,7 @@ class HelperTest extends TestCase
     public function it_displays_overlay_notifications()
     {
         $message = 'Overlay Message';
-        notify()->overlay($message);
+        Notify::overlay($message);
 
         $this->assertNotification($message);
         $this->assertTrue($this->getSession('overlay'));
@@ -69,7 +78,7 @@ class HelperTest extends TestCase
     public function it_displays_important_notifications()
     {
         $message = 'Welcome Aboard';
-        notify()->message($message)->important();
+        Notify::message($message)->important();
 
         $this->assertNotification($message);
         $this->assertTrue($this->getSession('important'));

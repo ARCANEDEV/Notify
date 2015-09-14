@@ -1,8 +1,12 @@
-<?php namespace Arcanedev\Notify\Tests\Laravel;
+<?php namespace Arcanedev\Notify\Tests;
 
-use Arcanedev\Notify\Laravel\Facade as Notify;
-
-class NotifyTest extends TestCase
+/**
+ * Class     HelperTest
+ *
+ * @package  Arcanedev\Notify\Tests\Laravel
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
+class HelperTest extends TestCase
 {
     /* ------------------------------------------------------------------------------------------------
      |  Test Functions
@@ -13,7 +17,7 @@ class NotifyTest extends TestCase
     {
         $message = 'Welcome Aboard';
 
-        Notify::message($message);
+        notify($message);
 
         $this->assertNotification($message);
     }
@@ -23,7 +27,7 @@ class NotifyTest extends TestCase
     {
         $message = 'Welcome Aboard';
 
-        Notify::info($message);
+        notify()->info($message);
 
         $this->assertNotification($message, 'info');
     }
@@ -33,7 +37,7 @@ class NotifyTest extends TestCase
     {
         $message = 'Welcome Aboard';
 
-        Notify::success($message);
+        notify()->success($message);
 
         $this->assertNotification($message, 'success');
     }
@@ -43,7 +47,7 @@ class NotifyTest extends TestCase
     {
         $message = 'Uh Oh';
 
-        Notify::error($message);
+        notify()->error($message);
 
         $this->assertNotification($message, 'danger');
     }
@@ -52,7 +56,7 @@ class NotifyTest extends TestCase
     public function it_displays_warning_notifications()
     {
         $message = 'Be careful!';
-        Notify::warning($message);
+        notify()->warning($message);
 
         $this->assertNotification($message, 'warning');
     }
@@ -61,7 +65,7 @@ class NotifyTest extends TestCase
     public function it_displays_overlay_notifications()
     {
         $message = 'Overlay Message';
-        Notify::overlay($message);
+        notify()->overlay($message);
 
         $this->assertNotification($message);
         $this->assertTrue($this->getSession('overlay'));
@@ -71,7 +75,7 @@ class NotifyTest extends TestCase
     public function it_displays_important_notifications()
     {
         $message = 'Welcome Aboard';
-        Notify::message($message)->important();
+        notify()->message($message)->important();
 
         $this->assertNotification($message);
         $this->assertTrue($this->getSession('important'));
