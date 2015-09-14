@@ -1,17 +1,25 @@
-Notify - Notification Helper [![Packagist License](http://img.shields.io/packagist/l/arcanedev/notify.svg?style=flat-square)](https://github.com/ARCANEDEV/Stripe/blob/master/LICENSE)
+Notify - Notification Helper [![Packagist License][badge_license]](https://github.com/ARCANEDEV/Notify/blob/master/LICENSE.md)
 ==============
-[![Travis Status](http://img.shields.io/travis/ARCANEDEV/Notify.svg?style=flat-square)](https://travis-ci.org/ARCANEDEV/Notify)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/Notify.svg?style=flat-square)](https://scrutinizer-ci.com/g/ARCANEDEV/Notify/?branch=master)
-[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/ARCANEDEV/Notify.svg?style=flat-square)](https://scrutinizer-ci.com/g/ARCANEDEV/Notify/?branch=master)
-[![Github Release](http://img.shields.io/github/release/ARCANEDEV/Notify.svg?style=flat-square)](https://github.com/ARCANEDEV/Notify/releases)
-[![Packagist Downloads](https://img.shields.io/packagist/dt/arcanedev/notify.svg?style=flat-square)](https://packagist.org/packages/arcanedev/notify)
-[![Github Issues](http://img.shields.io/github/issues/ARCANEDEV/Notify.svg?style=flat-square)](https://github.com/ARCANEDEV/Notify/issues)
+[![Travis Status][badge_build]](https://travis-ci.org/ARCANEDEV/Notify)
+[![Coverage Status][badge_coverage]](https://scrutinizer-ci.com/g/ARCANEDEV/Notify/?branch=master)
+[![Scrutinizer Code Quality][badge_quality]](https://scrutinizer-ci.com/g/ARCANEDEV/Notify/?branch=master)
+[![Github Issues][badge_issues]](https://github.com/ARCANEDEV/Notify/issues)
+[![Packagist Release][badge_release]](https://packagist.org/packages/arcanedev/notify)
+[![Packagist Downloads][badge_downloads]](https://packagist.org/packages/arcanedev/notify)
+
+[badge_license]:   http://img.shields.io/packagist/l/arcanedev/notify.svg?style=flat-square
+[badge_build]:     http://img.shields.io/travis/ARCANEDEV/Notify.svg?style=flat-square
+[badge_coverage]:  https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/Notify.svg?style=flat-square
+[badge_quality]:   https://img.shields.io/scrutinizer/g/ARCANEDEV/Notify.svg?style=flat-square
+[badge_issues]:    http://img.shields.io/github/issues/ARCANEDEV/Notify.svg?style=flat-square
+[badge_release]:   https://img.shields.io/packagist/v/arcanedev/notify.svg?style=flat-square
+[badge_downloads]: https://img.shields.io/packagist/dt/arcanedev/notify.svg?style=flat-square
 
 *By [ARCANEDEV&copy;](http://www.arcanedev.net/)*
 
 ### Requirements
     
-    - PHP >= 5.4.0
+    - PHP >= 5.5.9
     
 ## INSTALLATION
 
@@ -22,7 +30,7 @@ You can install the bindings via [Composer](http://getcomposer.org/). Add this t
 ```json
 {
     "require": {
-        "arcanedev/notify": "~1.0"
+        "arcanedev/notify": "~2.0"
     }
 }
 ```
@@ -31,11 +39,11 @@ Then install it via `composer install` or `composer update`.
 
 ### Laravel
 
-include the service provider within `app/config/app.php`.
+include the service provider within `config/app.php`.
 
 ```php
 'providers' => [
-    'Arcanedev\Notify\Laravel\ServiceProvider'
+    Arcanedev\Notify\NotifyServiceProvider::class
 ];
 ```
 
@@ -43,7 +51,7 @@ And add a facade alias to this same file at the bottom:
 
 ```php
 'aliases' => [
-    'Notify' => 'Arcanedev\Notify\Laravel\Facade'
+    'Notify' => Arcanedev\Notify\Facades\Notify::class
 ];
 ```
 
@@ -84,7 +92,7 @@ Again, if using Laravel, this will set a few keys in the session :
   - `notifyer.message`: The message you're flashing
   - `notifyer.level`: A string that represents the type of notification (good for applying HTML class names)
 
-Alternatively, again, if you're using Laravel, you may reference the `flash()` helper function, instead of the facade.
+Alternatively, again, if you're using Laravel, you may reference the `notify()` helper function, instead of the facade.
 
 Here's an example:
 
@@ -98,13 +106,13 @@ public function destroy()
 {
     Auth::logout();
 
-    flash()->success('You have been logged out.');
+    notify()->success('You have been logged out.');
 
     return home();
 }
 ```
 
-Or, for a general information flash, just do: `flash('Some message');`.
+Or, for a general information flash, just do: `notify('Some message');`.
 
 With this message flashed to the session, you may now display it in your view(s). Maybe something like:
 
@@ -134,6 +142,7 @@ Simply append to your layout view:
   - [ ] Examples
   - [x] Bootstrap 3 support
   - [ ] Zurb Foundation 5 support
-  - [x] Laravel 4 support 
-  - [ ] Laravel 5 support 
+  - [x] Laravel 4.2 support 
+  - [ ] Laravel 5.0 support
+  - [x] Laravel 5.1 support
   - [ ] Refactoring
