@@ -1,11 +1,13 @@
-<?php namespace Arcanedev\Notify\Laravel;
+<?php namespace Arcanedev\Notify;
 
 use Arcanedev\Notify\Contracts\SessionStoreContract;
-use Illuminate\Session\Store;
+use Illuminate\Session\Store as Session;
 
 /**
- * Class SessionStore
- * @package Arcanedev\Notify\Laravel
+ * Class     SessionStore
+ *
+ * @package  Arcanedev\Notify
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SessionStore implements SessionStoreContract
 {
@@ -13,7 +15,7 @@ class SessionStore implements SessionStoreContract
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    /** @var Store */
+    /** @var Session */
     private $session;
 
     /* ------------------------------------------------------------------------------------------------
@@ -21,9 +23,11 @@ class SessionStore implements SessionStoreContract
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * @param Store $session
+     * Make session store instance.
+     *
+     * @param Session $session
      */
-    public function __construct(Store $session)
+    public function __construct(Session $session)
     {
         $this->session = $session;
     }
@@ -35,8 +39,8 @@ class SessionStore implements SessionStoreContract
     /**
      * Flash a message to the session.
      *
-     * @param string $name
-     * @param mixed  $data
+     * @param  string  $name
+     * @param  mixed   $data
      */
     public function flash($name, $data)
     {
