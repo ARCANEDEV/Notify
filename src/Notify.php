@@ -2,6 +2,12 @@
 
 use Arcanedev\Notify\Contracts\SessionStoreContract;
 
+/**
+ * Class     Notify
+ *
+ * @package  Arcanedev\Notify
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class Notify
 {
     /* ------------------------------------------------------------------------------------------------
@@ -28,7 +34,7 @@ class Notify
     /**
      * Create a new flash notifier instance.
      *
-     * @param SessionStoreContract $session
+     * @param  SessionStoreContract  $session
      */
     public function __construct(SessionStoreContract $session)
     {
@@ -42,7 +48,7 @@ class Notify
     /**
      * Flash an information message.
      *
-     * @param  string $message
+     * @param  string  $message
      *
      * @return Notify
      */
@@ -56,7 +62,7 @@ class Notify
     /**
      * Flash a success message.
      *
-     * @param  string $message
+     * @param  string  $message
      *
      * @return Notify
      */

@@ -4,6 +4,12 @@ use Arcanedev\Notify\Notify;
 use Mockery as m;
 use Mockery\MockInterface;
 
+/**
+ * Class     NotifyTest
+ *
+ * @package  Arcanedev\Notify\Tests
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class NotifyTest extends TestCase
 {
     /* ------------------------------------------------------------------------------------------------
@@ -26,7 +32,7 @@ class NotifyTest extends TestCase
     {
         parent::setUp();
 
-        $this->session = m::mock('Arcanedev\Notify\Contracts\SessionStoreContract');
+        $this->session = m::mock(\Arcanedev\Notify\Contracts\SessionStoreContract::class);
         $this->notify  = new Notify($this->session);
     }
 
