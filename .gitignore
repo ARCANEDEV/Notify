@@ -1,5 +1,6 @@
-.idea/
-build/
-vendor/
+/.idea/
+/_arcanedev/
+/build/
+/vendor/
 composer.phar
 composer.lock
