@@ -67,16 +67,25 @@ class NotifyServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->registerConfig();
+
         $this->bind(
             Contracts\SessionStoreContract::class,
             Session::class
         );
 
         $this->singleton('arcanedev.notify', function ($app) {
-            /** @var \Illuminate\Foundation\Application $app */
+            /**
+             * @var \Illuminate\Foundation\Application  $app
+             * @var \Illuminate\Config\Repository       $config
+             */
             $session = $app[Contracts\SessionStoreContract::class];
+            $config  = $app['config'];
 
-            return new Notify($session);
+            return new Notify(
+                $session,
+                $config->get('notify.session.prefix', 'notifier.')
+            );
         });
     }
 
