@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\Notify\Tests;
 
+use Arcanedev\Notify\Contracts\SessionStoreContract;
 use Arcanedev\Notify\Notify;
 use Mockery as m;
 use Mockery\MockInterface;
@@ -16,13 +17,11 @@ class NotifyTest extends TestCase
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    /** @var MockInterface */
+    /** @var SessionStoreContract|MockInterface */
     private $session;
 
     /** @var Notify */
     private $notify;
-
-    const SESSION_NAME = 'notifyer';
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -32,7 +31,7 @@ class NotifyTest extends TestCase
     {
         parent::setUp();
 
-        $this->session = m::mock(\Arcanedev\Notify\Contracts\SessionStoreContract::class);
+        $this->session = m::mock(SessionStoreContract::class);
         $this->notify  = new Notify($this->session);
     }
 

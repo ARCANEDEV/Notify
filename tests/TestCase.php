@@ -11,10 +11,10 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 abstract class TestCase extends BaseTestCase
 {
     /* ------------------------------------------------------------------------------------------------
-     |  Properties
+     |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const SESSION_NAME = 'notifyer';
+    const SESSION_NAME = 'notifier';
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
