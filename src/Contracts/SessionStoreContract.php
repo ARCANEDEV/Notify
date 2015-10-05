@@ -15,10 +15,10 @@ interface SessionStoreContract
     /**
      * Flash a message to the session.
      *
-     * @param  string  $name
-     * @param  mixed   $data
+     * @param  string  $key
+     * @param  mixed   $value
      */
-    public function flash($name, $data);
+    public function flash($key, $value);
 
     /**
      * Flash multiple key/value pairs.

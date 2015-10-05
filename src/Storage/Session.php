@@ -39,18 +39,12 @@ class Session implements SessionStoreContract
     /**
      * Flash a message to the session.
      *
-     * @param  string  $name
-     * @param  mixed   $data
+     * @param  string  $key
+     * @param  mixed   $value
      */
-    public function flash($name, $data = null)
+    public function flash($key, $value)
     {
-        if (is_array($name)) {
-            $this->flashMany($name);
-
-            return;
-        }
-
-        $this->session->flash($name, $data);
+        $this->session->flash($key, $value);
     }
 
     /**
