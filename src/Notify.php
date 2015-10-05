@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\Notify;
 
+use Arcanedev\Notify\Contracts\NotifyInterface;
 use Arcanedev\Notify\Contracts\SessionStoreContract;
 
 /**
@@ -8,7 +9,7 @@ use Arcanedev\Notify\Contracts\SessionStoreContract;
  * @package  Arcanedev\Notify
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Notify
+class Notify implements NotifyInterface
 {
     /* ------------------------------------------------------------------------------------------------
      |  Constants
@@ -50,7 +51,7 @@ class Notify
      *
      * @param  string  $message
      *
-     * @return Notify
+     * @return self
      */
     public function info($message)
     {
@@ -64,7 +65,7 @@ class Notify
      *
      * @param  string  $message
      *
-     * @return Notify
+     * @return self
      */
     public function success($message)
     {
@@ -76,9 +77,9 @@ class Notify
     /**
      * Flash an error message.
      *
-     * @param  string $message
+     * @param  string  $message
      *
-     * @return Notify
+     * @return self
      */
     public function error($message)
     {
@@ -90,9 +91,9 @@ class Notify
     /**
      * Flash a warning message.
      *
-     * @param  string $message
+     * @param  string  $message
      *
-     * @return Notify
+     * @return self
      */
     public function warning($message)
     {
@@ -104,10 +105,10 @@ class Notify
     /**
      * Flash a general message.
      *
-     * @param  string $message
-     * @param  string $level
+     * @param  string  $message
+     * @param  string  $level
      *
-     * @return Notify
+     * @return self
      */
     public function message($message, $level = 'info')
     {
@@ -120,10 +121,10 @@ class Notify
     /**
      * Flash an overlay modal.
      *
-     * @param  string $message
-     * @param  string $title
+     * @param  string  $message
+     * @param  string  $title
      *
-     * @return Notify
+     * @return self
      */
     public function overlay($message, $title = 'Notice')
     {
@@ -137,7 +138,7 @@ class Notify
     /**
      * Add an "important" flash to the session.
      *
-     * @return Notify
+     * @return self
      */
     public function important()
     {
