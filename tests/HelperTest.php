@@ -75,7 +75,7 @@ class HelperTest extends TestCase
     public function it_displays_important_notifications()
     {
         $message = 'Welcome Aboard';
-        notify()->message($message)->important();
+        notify()->info($message)->important();
 
         $this->assertNotification($message);
         $this->assertTrue($this->getSession('important'));

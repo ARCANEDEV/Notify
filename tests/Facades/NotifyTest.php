@@ -16,16 +16,6 @@ class NotifyTest extends TestCase
      | ------------------------------------------------------------------------------------------------
      */
     /** @test */
-    public function it_displays_default_notifications()
-    {
-        $message = 'Welcome Aboard';
-
-        Notify::message($message);
-
-        $this->assertNotification($message);
-    }
-
-    /** @test */
     public function it_displays_info_notifications()
     {
         $message = 'Welcome Aboard';
@@ -78,7 +68,7 @@ class NotifyTest extends TestCase
     public function it_displays_important_notifications()
     {
         $message = 'Welcome Aboard';
-        Notify::message($message)->important();
+        Notify::info($message)->important();
 
         $this->assertNotification($message);
         $this->assertTrue($this->getSession('important'));

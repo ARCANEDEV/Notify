@@ -50,16 +50,6 @@ class NotifyTest extends TestCase
      | ------------------------------------------------------------------------------------------------
      */
     /** @test */
-    public function it_displays_default_notifications()
-    {
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'message', 'Welcome Aboard');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'title', 'Notice');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'level', 'info');
-
-        $this->notify->message('Welcome Aboard');
-    }
-
-    /** @test */
     public function it_displays_info_notifications()
     {
         $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'message', 'Welcome Aboard');
@@ -118,6 +108,6 @@ class NotifyTest extends TestCase
         $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'level', 'info');
         $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'important', true);
 
-        $this->notify->message('Welcome Aboard')->important();
+        $this->notify->info('Welcome Aboard')->important();
     }
 }

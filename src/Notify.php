@@ -62,7 +62,10 @@ class Notify implements NotifyInterface
      */
     public function info($message)
     {
-        $this->message($message, 'info');
+        $this->flashMany([
+            'message' => $message,
+            'level'   => 'info',
+        ]);
 
         return $this;
     }
@@ -76,8 +79,10 @@ class Notify implements NotifyInterface
      */
     public function success($message)
     {
-        $this->message($message, 'success');
-
+        $this->flashMany([
+            'message' => $message,
+            'level'   => 'success',
+        ]);
         return $this;
     }
 
@@ -90,7 +95,10 @@ class Notify implements NotifyInterface
      */
     public function error($message)
     {
-        $this->message($message, 'danger');
+        $this->flashMany([
+            'message' => $message,
+            'level'   => 'danger',
+        ]);
 
         return $this;
     }
@@ -104,7 +112,10 @@ class Notify implements NotifyInterface
      */
     public function warning($message)
     {
-        $this->message($message, 'warning');
+        $this->flashMany([
+            'message' => $message,
+            'level'   => 'warning',
+        ]);
 
         return $this;
     }
@@ -119,27 +130,11 @@ class Notify implements NotifyInterface
      */
     public function overlay($message, $title = 'Notice')
     {
-        $this->message($message, 'info');
-
-        return $this->flashMany([
-            'overlay' => true,
-            'title'   => $title,
-        ]);
-    }
-
-    /**
-     * Flash a general message.
-     *
-     * @param  string  $message
-     * @param  string  $level
-     *
-     * @return self
-     */
-    public function message($message, $level = 'info')
-    {
         return $this->flashMany([
             'message' => $message,
-            'level'   => $level,
+            'level'   => 'info',
+            'overlay' => true,
+            'title'   => $title,
         ]);
     }
 
