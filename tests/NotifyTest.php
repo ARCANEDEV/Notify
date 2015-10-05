@@ -32,7 +32,9 @@ class NotifyTest extends TestCase
         parent::setUp();
 
         $this->session = m::mock(SessionStoreContract::class);
-        $this->notify  = new Notify($this->session);
+        $this->session->shouldReceive('flashMany');
+
+        $this->notify  = new Notify($this->session, $this->sessionPrefix);
     }
 
     public function tearDown()
@@ -50,9 +52,9 @@ class NotifyTest extends TestCase
     /** @test */
     public function it_displays_default_notifications()
     {
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.message', 'Welcome Aboard');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.title', 'Notice');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.level', 'info');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'message', 'Welcome Aboard');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'title', 'Notice');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'level', 'info');
 
         $this->notify->message('Welcome Aboard');
     }
@@ -60,9 +62,9 @@ class NotifyTest extends TestCase
     /** @test */
     public function it_displays_info_notifications()
     {
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.message', 'Welcome Aboard');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.title', 'Notice');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.level', 'info');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'message', 'Welcome Aboard');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'title', 'Notice');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'level', 'info');
 
         $this->notify->info('Welcome Aboard');
     }
@@ -70,9 +72,9 @@ class NotifyTest extends TestCase
     /** @test */
     public function it_displays_success_notifications()
     {
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.message', 'Welcome Aboard');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.title', 'Notice');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.level', 'success');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'message', 'Welcome Aboard');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'title', 'Notice');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'level', 'success');
 
         $this->notify->success('Welcome Aboard');
     }
@@ -80,9 +82,9 @@ class NotifyTest extends TestCase
     /** @test */
     public function it_displays_error_notifications()
     {
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.message', 'Uh Oh');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.title', 'Notice');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.level', 'danger');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'message', 'Uh Oh');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'title', 'Notice');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'level', 'danger');
 
         $this->notify->error('Uh Oh');
     }
@@ -90,9 +92,9 @@ class NotifyTest extends TestCase
     /** @test */
     public function it_displays_warning_notifications()
     {
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.message', 'Be careful!');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.title', 'Notice');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.level', 'warning');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'message', 'Be careful!');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'title', 'Notice');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'level', 'warning');
 
         $this->notify->warning('Be careful!');
     }
@@ -100,10 +102,10 @@ class NotifyTest extends TestCase
     /** @test */
     public function it_displays_overlay_notifications()
     {
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.message', 'Overlay Message');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.title', 'Notice');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.level', 'info');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.overlay', true);
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'message', 'Overlay Message');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'title', 'Notice');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'level', 'info');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'overlay', true);
 
         $this->notify->overlay('Overlay Message');
     }
@@ -111,10 +113,10 @@ class NotifyTest extends TestCase
     /** @test */
     public function it_displays_important_notifications()
     {
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.message', 'Welcome Aboard');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.title', 'Notice');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.level', 'info');
-        $this->session->shouldReceive('flash')->with(self::SESSION_NAME . '.important', true);
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'message', 'Welcome Aboard');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'title', 'Notice');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'level', 'info');
+        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'important', true);
 
         $this->notify->message('Welcome Aboard')->important();
     }

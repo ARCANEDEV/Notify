@@ -11,10 +11,15 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 abstract class TestCase extends BaseTestCase
 {
     /* ------------------------------------------------------------------------------------------------
-     |  Constants
+     |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    const SESSION_NAME = 'notifier';
+    /**
+     * Session prefix.
+     *
+     * @var string
+     */
+    protected $sessionPrefix;
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -23,6 +28,8 @@ abstract class TestCase extends BaseTestCase
     public function setUp()
     {
         parent::setUp();
+
+        $this->sessionPrefix = config('notify.session.prefix', 'notifier.');
     }
 
     public function tearDown()
@@ -110,6 +117,6 @@ abstract class TestCase extends BaseTestCase
      */
     protected function getSession($name)
     {
-        return session()->get(self::SESSION_NAME . '.' . $name);
+        return session()->get($this->sessionPrefix . $name);
     }
 }
