@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\Notify;
 
+use Arcanedev\Notify\Storage\Session;
 use Arcanedev\Support\PackageServiceProvider as ServiceProvider;
 
 /**
@@ -68,7 +69,7 @@ class NotifyServiceProvider extends ServiceProvider
     {
         $this->bind(
             Contracts\SessionStoreContract::class,
-            SessionStore::class
+            Session::class
         );
 
         $this->singleton('arcanedev.notify', function ($app) {
