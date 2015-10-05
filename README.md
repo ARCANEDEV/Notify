@@ -94,8 +94,8 @@ Notify::overlay('Modal Message', 'Modal Title')
 
 Again, if using Laravel, this will set a few keys in the session :
 
-  - `notifyer.message`: The message you're flashing
-  - `notifyer.level`: A string that represents the type of notification (good for applying HTML class names)
+  - `notifier.message`: The message you're flashing
+  - `notifier.level`: A string that represents the type of notification (good for applying HTML class names)
 
 Alternatively, again, if you're using Laravel, you may reference the `notify()` helper function, instead of the facade.
 
@@ -122,11 +122,11 @@ Or, for a general information flash, just do: `notify('Some message');`.
 With this message flashed to the session, you may now display it in your view(s). Maybe something like:
 
 ```html
-@if (Session::has('notifyer.message'))
-    <div class="alert alert-{{ Session::get('notifyer.level') }}">
+@if (Session::has('notifier.message'))
+    <div class="alert alert-{{ Session::get('notifier.level') }}">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 
-        {{ Session::get('notifyer.message') }}
+        {{ Session::get('notifier.message') }}
     </div>
 @endif
 ```
