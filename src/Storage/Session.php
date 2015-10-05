@@ -15,7 +15,11 @@ class Session implements SessionStoreContract
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    /** @var Session */
+    /**
+     * The Illuminate Session instance.
+     *
+     * @var IlluminateSession
+     */
     private $session;
 
     /* ------------------------------------------------------------------------------------------------
