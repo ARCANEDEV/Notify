@@ -26,13 +26,4 @@ interface SessionStoreContract
      * @param  array  $data
      */
     public function flashMany($data);
-
-    /**
-     * Get a value from session storage.
-     *
-     * @param  string  $key
-     *
-     * @return mixed
-     */
-    public function get($key);
 }

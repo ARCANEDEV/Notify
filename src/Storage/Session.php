@@ -64,16 +64,4 @@ class Session implements SessionStoreContract
             $this->flash($key, $value);
         }
     }
-
-    /**
-     * Get a value from session storage.
-     *
-     * @param  string  $key
-     *
-     * @return mixed
-     */
-    public function get($key)
-    {
-        return $this->session->get($key);
-    }
 }
