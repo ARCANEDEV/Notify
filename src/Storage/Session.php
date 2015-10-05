@@ -1,15 +1,15 @@
-<?php namespace Arcanedev\Notify;
+<?php namespace Arcanedev\Notify\Storage;
 
 use Arcanedev\Notify\Contracts\SessionStoreContract;
-use Illuminate\Session\Store as Session;
+use Illuminate\Session\Store as IlluminateSession;
 
 /**
- * Class     SessionStore
+ * Class     Session
  *
  * @package  Arcanedev\Notify
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class SessionStore implements SessionStoreContract
+class Session implements SessionStoreContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
@@ -25,9 +25,9 @@ class SessionStore implements SessionStoreContract
     /**
      * Make session store instance.
      *
-     * @param Session $session
+     * @param  IlluminateSession  $session
      */
-    public function __construct(Session $session)
+    public function __construct(IlluminateSession $session)
     {
         $this->session = $session;
     }
@@ -42,8 +42,38 @@ class SessionStore implements SessionStoreContract
      * @param  string  $name
      * @param  mixed   $data
      */
-    public function flash($name, $data)
+    public function flash($name, $data = null)
     {
+        if (is_array($name)) {
+            $this->flashMany($name);
+
+            return;
+        }
+
         $this->session->flash($name, $data);
+    }
+
+    /**
+     * Flash multiple key/value pairs.
+     *
+     * @param  array  $data
+     */
+    public function flashMany($data)
+    {
+        foreach ($data as $key => $value) {
+            $this->flash($key, $value);
+        }
+    }
+
+    /**
+     * Get a value from session storage.
+     *
+     * @param  string  $key
+     *
+     * @return mixed
+     */
+    public function get($key)
+    {
+        return $this->session->get($key);
     }
 }

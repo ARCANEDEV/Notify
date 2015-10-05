@@ -19,4 +19,20 @@ interface SessionStoreContract
      * @param  mixed   $data
      */
     public function flash($name, $data);
+
+    /**
+     * Flash multiple key/value pairs.
+     *
+     * @param  array  $data
+     */
+    public function flashMany($data);
+
+    /**
+     * Get a value from session storage.
+     *
+     * @param  string  $key
+     *
+     * @return mixed
+     */
+    public function get($key);
 }
