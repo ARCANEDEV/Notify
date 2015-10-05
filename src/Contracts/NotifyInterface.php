@@ -49,16 +49,6 @@ interface NotifyInterface
     public function warning($message);
 
     /**
-     * Flash a general message.
-     *
-     * @param  string  $message
-     * @param  string  $level
-     *
-     * @return self
-     */
-    public function message($message, $level = 'info');
-
-    /**
      * Flash an overlay modal.
      *
      * @param  string  $message
@@ -67,6 +57,16 @@ interface NotifyInterface
      * @return self
      */
     public function overlay($message, $title = 'Notice');
+
+    /**
+     * Flash a general message.
+     *
+     * @param  string  $message
+     * @param  string  $level
+     *
+     * @return self
+     */
+    public function message($message, $level = 'info');
 
     /**
      * Add an "important" flash to the session.
