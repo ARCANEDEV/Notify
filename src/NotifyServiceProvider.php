@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\Notify;
 
-use Arcanedev\Support\PackageServiceProvider;
+use Arcanedev\Support\PackageServiceProvider as ServiceProvider;
 
 /**
  * Class     NotifyServiceProvider
@@ -8,7 +8,7 @@ use Arcanedev\Support\PackageServiceProvider;
  * @package  Arcanedev\Notify
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class NotifyServiceProvider extends PackageServiceProvider
+class NotifyServiceProvider extends ServiceProvider
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
@@ -27,13 +27,6 @@ class NotifyServiceProvider extends PackageServiceProvider
      * @var string
      */
     protected $package  = 'notify';
-
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
 
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
