@@ -24,7 +24,20 @@ class HelperTest extends TestCase
      | ------------------------------------------------------------------------------------------------
      */
     /** @test */
-    public function it_can_flash_a_notification_with_only_message()
+    public function it_can_flash_a_notification_with_only_message_one()
+    {
+        $message = 'Welcome Aboard';
+
+        notify($message);
+
+        $this->assertTrue(notify()->ready());
+        $this->assertEquals($message, notify()->message());
+        $this->assertEmpty(notify()->type());
+        $this->assertEmpty(notify()->options());
+    }
+
+    /** @test */
+    public function it_can_flash_a_notification_with_only_message_two()
     {
         $message = 'Welcome Aboard';
 
