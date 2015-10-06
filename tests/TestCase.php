@@ -1,6 +1,9 @@
 <?php namespace Arcanedev\Notify\Tests;
 
+use Arcanedev\Notify\Contracts\SessionStoreContract;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 
 /**
  * Class     TestCase
@@ -20,6 +23,9 @@ abstract class TestCase extends BaseTestCase
      * @var string
      */
     protected $sessionPrefix;
+
+    /** @var SessionStoreContract|ObjectProphecy */
+    protected $session;
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -90,33 +96,5 @@ abstract class TestCase extends BaseTestCase
     public function artisan($command, $parameters = [])
     {
         // TODO: Implement artisan() method.
-    }
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Assert Notification
-     *
-     * @param string $message
-     * @param string $level
-     */
-    protected function assertNotification($message, $level = 'info')
-    {
-        $this->assertEquals($message, $this->getSession('message'));
-        $this->assertEquals($level, $this->getSession('level'));
-    }
-
-    /**
-     * Get session value
-     *
-     * @param  string $name
-     *
-     * @return mixed
-     */
-    protected function getSession($name)
-    {
-        return session()->get($this->sessionPrefix . $name);
     }
 }
