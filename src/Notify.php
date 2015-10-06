@@ -50,102 +50,88 @@ class Notify implements NotifyInterface
     }
 
     /* ------------------------------------------------------------------------------------------------
+     |  Getters & Setters
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Get the notification message.
+     *
+     * @return string
+     */
+    public function message()
+    {
+        return $this->getSession('message');
+    }
+
+    /**
+     * Get the notification type.
+     *
+     * @return string
+     */
+    public function type()
+    {
+        return $this->getSession('type');
+    }
+
+    /**
+     * Get an additional stored options.
+     *
+     * @param  boolean  $assoc
+     *
+     * @return mixed
+     */
+    public function options($assoc = false)
+    {
+        return json_decode($this->getSession('options'), $assoc);
+    }
+
+    /**
+     * Get a notification option.
+     *
+     * @param  string      $key
+     * @param  mixed|null  $default
+     *
+     * @return mixed
+     */
+    public function option($key, $default = null)
+    {
+        return array_get($this->options(true), $key, $default);
+    }
+
+    /**
+     * If the notification is ready to be shown.
+     *
+     * @return bool
+     */
+    public function ready()
+    {
+        return ! empty($this->message());
+    }
+
+    /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Flash an information message.
+     * Flash a message.
      *
      * @param  string  $message
+     * @param  string  $type
+     * @param  array   $options
      *
      * @return self
      */
-    public function info($message)
+    public function flash($message, $type = '', array $options = [])
     {
-        $this->flashMany([
-            'message' => $message,
-            'level'   => 'info',
-        ]);
+        $data = [
+            $this->sessionPrefix . 'message' => $message,
+            $this->sessionPrefix . 'type'    => $type,
+            $this->sessionPrefix . 'options' => json_encode($options),
+        ];
+
+        $this->session->flash($data);
 
         return $this;
-    }
-
-    /**
-     * Flash a success message.
-     *
-     * @param  string  $message
-     *
-     * @return self
-     */
-    public function success($message)
-    {
-        $this->flashMany([
-            'message' => $message,
-            'level'   => 'success',
-        ]);
-        return $this;
-    }
-
-    /**
-     * Flash an error message.
-     *
-     * @param  string  $message
-     *
-     * @return self
-     */
-    public function error($message)
-    {
-        $this->flashMany([
-            'message' => $message,
-            'level'   => 'danger',
-        ]);
-
-        return $this;
-    }
-
-    /**
-     * Flash a warning message.
-     *
-     * @param  string  $message
-     *
-     * @return self
-     */
-    public function warning($message)
-    {
-        $this->flashMany([
-            'message' => $message,
-            'level'   => 'warning',
-        ]);
-
-        return $this;
-    }
-
-    /**
-     * Flash an overlay modal.
-     *
-     * @param  string  $message
-     * @param  string  $title
-     *
-     * @return self
-     */
-    public function overlay($message, $title = 'Notice')
-    {
-        return $this->flashMany([
-            'message' => $message,
-            'level'   => 'info',
-            'overlay' => true,
-            'title'   => $title,
-        ]);
-    }
-
-    /**
-     * Add an "important" flash to the session.
-     *
-     * @return self
-     */
-    public function important()
-    {
-        return $this->flash('important', true);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -153,37 +139,14 @@ class Notify implements NotifyInterface
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Flash the notification.
+     * Get session value.
      *
      * @param  string  $name
-     * @param  mixed   $value
      *
-     * @return self
+     * @return mixed
      */
-    private function flash($name, $value)
+    private function getSession($name)
     {
-        $this->session->flash($this->sessionPrefix . $name, $value);
-
-        return $this;
-    }
-
-    /**
-     * Flash the notification with many values
-     *
-     * @param  array  $data
-     *
-     * @return self
-     */
-    private function flashMany(array $data)
-    {
-        $prefixed = [];
-
-        foreach ($data as $key => $value) {
-            $prefixed[$this->sessionPrefix . $key] = $value;
-        }
-
-        $this->session->flashMany($prefixed);
-
-        return $this;
+        return $this->session->get($this->sessionPrefix . $name);
     }
 }
