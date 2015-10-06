@@ -17,7 +17,7 @@ class NotifyServiceProviderTest extends TestCase
     /**
      * @var NotifyServiceProvider
      */
-    private $serviceProvider;
+    private $provider;
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -27,14 +27,14 @@ class NotifyServiceProviderTest extends TestCase
     {
         parent::setUp();
 
-        $this->serviceProvider = new NotifyServiceProvider($this->app);
+        $this->provider = $this->app->getProvider(NotifyServiceProvider::class);
     }
 
     public function tearDown()
     {
         parent::tearDown();
 
-        unset($this->serviceProvider);
+        unset($this->provider);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -49,6 +49,6 @@ class NotifyServiceProviderTest extends TestCase
         // This is for 100% code converge
         $this->assertEquals([
             'arcanedev.notify'
-        ], $this->serviceProvider->provides());
+        ], $this->provider->provides());
     }
 }

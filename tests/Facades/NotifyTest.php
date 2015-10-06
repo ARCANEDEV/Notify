@@ -16,71 +16,49 @@ class NotifyTest extends TestCase
      | ------------------------------------------------------------------------------------------------
      */
     /** @test */
-    public function it_displays_default_notifications()
+    public function it_can_flash_a_notification_with_only_message()
     {
         $message = 'Welcome Aboard';
 
-        Notify::message($message);
+        Notify::flash($message);
 
-        $this->assertNotification($message);
+        $this->assertTrue(Notify::ready());
+        $this->assertEquals($message, Notify::message());
+        $this->assertEmpty(Notify::type());
+        $this->assertEmpty(Notify::options());
     }
 
     /** @test */
-    public function it_displays_info_notifications()
+    public function it_can_flash_notification_with_type()
     {
         $message = 'Welcome Aboard';
+        $type    = 'info';
 
-        Notify::info($message);
+        Notify::flash($message, $type);
 
-        $this->assertNotification($message, 'info');
+        $this->assertTrue(Notify::ready());
+        $this->assertEquals($message, Notify::message());
+        $this->assertEquals($type,    Notify::type());
+        $this->assertEmpty(Notify::options());
     }
 
     /** @test */
-    public function it_displays_success_notifications()
+    public function it_can_flash_notification_with_options()
     {
         $message = 'Welcome Aboard';
+        $type    = 'success';
+        $options = [
+            'color'     => '#BADA55',
+            'position'  => 'absolute',
+        ];
 
-        Notify::success($message);
+        Notify::flash($message, $type, $options);
 
-        $this->assertNotification($message, 'success');
-    }
-
-    /** @test */
-    public function it_displays_error_notifications()
-    {
-        $message = 'Uh Oh';
-
-        Notify::error($message);
-
-        $this->assertNotification($message, 'danger');
-    }
-
-    /** @test */
-    public function it_displays_warning_notifications()
-    {
-        $message = 'Be careful!';
-        Notify::warning($message);
-
-        $this->assertNotification($message, 'warning');
-    }
-
-    /** @test */
-    public function it_displays_overlay_notifications()
-    {
-        $message = 'Overlay Message';
-        Notify::overlay($message);
-
-        $this->assertNotification($message);
-        $this->assertTrue($this->getSession('overlay'));
-    }
-
-    /** @test */
-    public function it_displays_important_notifications()
-    {
-        $message = 'Welcome Aboard';
-        Notify::message($message)->important();
-
-        $this->assertNotification($message);
-        $this->assertTrue($this->getSession('important'));
+        $this->assertTrue(Notify::ready());
+        $this->assertEquals($message,             Notify::message());
+        $this->assertEquals($type,                Notify::type());
+        $this->assertEquals($options,             Notify::options(true));
+        $this->assertEquals($options['color'],    Notify::option('color'));
+        $this->assertEquals($options['position'], Notify::option('position'));
     }
 }

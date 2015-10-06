@@ -2,8 +2,7 @@
 
 use Arcanedev\Notify\Contracts\SessionStoreContract;
 use Arcanedev\Notify\Notify;
-use Mockery as m;
-use Mockery\MockInterface;
+use Prophecy\Argument;
 
 /**
  * Class     NotifyTest
@@ -17,9 +16,6 @@ class NotifyTest extends TestCase
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    /** @var SessionStoreContract|MockInterface */
-    private $session;
-
     /** @var Notify */
     private $notify;
 
@@ -31,17 +27,15 @@ class NotifyTest extends TestCase
     {
         parent::setUp();
 
-        $this->session = m::mock(SessionStoreContract::class);
-        $this->session->shouldReceive('flashMany');
+        $this->notify  = new Notify(app(SessionStoreContract::class), $this->sessionPrefix);
 
-        $this->notify  = new Notify($this->session, $this->sessionPrefix);
+        $this->assertFalse($this->notify->ready());
     }
 
     public function tearDown()
     {
         parent::tearDown();
 
-        unset($this->session);
         unset($this->notify);
     }
 
@@ -50,74 +44,49 @@ class NotifyTest extends TestCase
      | ------------------------------------------------------------------------------------------------
      */
     /** @test */
-    public function it_displays_default_notifications()
+    public function it_can_flash_a_notification_with_only_message()
     {
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'message', 'Welcome Aboard');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'title', 'Notice');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'level', 'info');
+        $message = 'Welcome Aboard';
 
-        $this->notify->message('Welcome Aboard');
+        $this->notify->flash($message);
+
+        $this->assertTrue($this->notify->ready());
+        $this->assertEquals($message, $this->notify->message());
+        $this->assertEmpty($this->notify->type());
+        $this->assertEmpty($this->notify->options());
     }
 
     /** @test */
-    public function it_displays_info_notifications()
+    public function it_can_flash_notification_with_type()
     {
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'message', 'Welcome Aboard');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'title', 'Notice');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'level', 'info');
+        $message = 'Welcome Aboard';
+        $type    = 'info';
 
-        $this->notify->info('Welcome Aboard');
+        $this->notify->flash($message, $type);
+
+        $this->assertTrue($this->notify->ready());
+        $this->assertEquals($message, $this->notify->message());
+        $this->assertEquals($type,    $this->notify->type());
+        $this->assertEmpty($this->notify->options());
     }
 
     /** @test */
-    public function it_displays_success_notifications()
+    public function it_can_flash_notification_with_options()
     {
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'message', 'Welcome Aboard');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'title', 'Notice');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'level', 'success');
+        $message = 'Welcome Aboard';
+        $type    = 'success';
+        $options = [
+            'color'     => '#BADA55',
+            'position'  => 'absolute',
+        ];
 
-        $this->notify->success('Welcome Aboard');
-    }
+        $this->notify->flash($message, $type, $options);
 
-    /** @test */
-    public function it_displays_error_notifications()
-    {
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'message', 'Uh Oh');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'title', 'Notice');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'level', 'danger');
-
-        $this->notify->error('Uh Oh');
-    }
-
-    /** @test */
-    public function it_displays_warning_notifications()
-    {
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'message', 'Be careful!');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'title', 'Notice');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'level', 'warning');
-
-        $this->notify->warning('Be careful!');
-    }
-
-    /** @test */
-    public function it_displays_overlay_notifications()
-    {
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'message', 'Overlay Message');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'title', 'Notice');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'level', 'info');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'overlay', true);
-
-        $this->notify->overlay('Overlay Message');
-    }
-
-    /** @test */
-    public function it_displays_important_notifications()
-    {
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'message', 'Welcome Aboard');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'title', 'Notice');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'level', 'info');
-        $this->session->shouldReceive('flash')->with($this->sessionPrefix . 'important', true);
-
-        $this->notify->message('Welcome Aboard')->important();
+        $this->assertTrue($this->notify->ready());
+        $this->assertEquals($message,             $this->notify->message());
+        $this->assertEquals($type,                $this->notify->type());
+        $this->assertEquals($options,             $this->notify->options(true));
+        $this->assertEquals($options['color'],    $this->notify->option('color'));
+        $this->assertEquals($options['position'], $this->notify->option('position'));
     }
 }

@@ -43,11 +43,17 @@ class Session implements SessionStoreContract
     /**
      * Flash a message to the session.
      *
-     * @param  string  $key
-     * @param  mixed   $value
+     * @param  string|array  $key
+     * @param  mixed         $value
      */
-    public function flash($key, $value)
+    public function flash($key, $value = null)
     {
+        if (is_array($key)) {
+            $this->flashMany($key);
+
+            return;
+        }
+
         $this->session->flash($key, $value);
     }
 
@@ -61,5 +67,17 @@ class Session implements SessionStoreContract
         foreach ($data as $key => $value) {
             $this->flash($key, $value);
         }
+    }
+
+    /**
+     * Get a value from session storage.
+     *
+     * @param  string $key
+     *
+     * @return mixed
+     */
+    public function get($key)
+    {
+        return $this->session->get($key);
     }
 }

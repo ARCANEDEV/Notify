@@ -15,10 +15,10 @@ interface SessionStoreContract
     /**
      * Flash a message to the session.
      *
-     * @param  string  $key
-     * @param  mixed   $value
+     * @param  string|array  $key
+     * @param  mixed         $value
      */
-    public function flash($key, $value);
+    public function flash($key, $value = null);
 
     /**
      * Flash multiple key/value pairs.
@@ -26,4 +26,13 @@ interface SessionStoreContract
      * @param  array  $data
      */
     public function flashMany($data);
+
+    /**
+     * Get a value from session storage.
+     *
+     * @param  string $key
+     *
+     * @return mixed
+     */
+    public function get($key);
 }

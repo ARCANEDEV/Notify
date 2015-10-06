@@ -14,7 +14,7 @@ if ( ! function_exists('notify')) {
         $notifier = app('arcanedev.notify');
 
         if ( ! is_null($message)) {
-            $notifier->info($message);
+            $notifier->flash($message);
         }
 
         return $notifier;
