@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\Notify\Tests;
 
-use Arcanedev\Notify\Contracts\SessionStoreContract;
+use Arcanedev\Notify\Contracts\SessionStoreInterface;
 use Arcanedev\Notify\Notify;
 use Prophecy\Argument;
 
@@ -27,7 +27,7 @@ class NotifyTest extends TestCase
     {
         parent::setUp();
 
-        $this->notify  = new Notify(app(SessionStoreContract::class), $this->sessionPrefix);
+        $this->notify  = new Notify(app(SessionStoreInterface::class), $this->sessionPrefix);
 
         $this->assertFalse($this->notify->ready());
     }

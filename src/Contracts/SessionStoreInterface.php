@@ -1,12 +1,12 @@
 <?php namespace Arcanedev\Notify\Contracts;
 
 /**
- * Interface  SessionStoreContract
+ * Interface  SessionStoreInterface
  *
  * @package   Arcanedev\Notify\Contracts
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface SessionStoreContract
+interface SessionStoreInterface
 {
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions

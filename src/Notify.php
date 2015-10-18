@@ -1,7 +1,7 @@
 <?php namespace Arcanedev\Notify;
 
 use Arcanedev\Notify\Contracts\NotifyInterface;
-use Arcanedev\Notify\Contracts\SessionStoreContract;
+use Arcanedev\Notify\Contracts\SessionStoreInterface;
 
 /**
  * Class     Notify
@@ -29,7 +29,7 @@ class Notify implements NotifyInterface
     /**
      * The session writer.
      *
-     * @var SessionStoreContract
+     * @var SessionStoreInterface
      */
     private $session;
 
@@ -40,10 +40,10 @@ class Notify implements NotifyInterface
     /**
      * Create a new flash notifier instance.
      *
-     * @param  SessionStoreContract  $session
+     * @param  SessionStoreInterface  $session
      * @param  string                $prefix
      */
-    public function __construct(SessionStoreContract $session, $prefix)
+    public function __construct(SessionStoreInterface $session, $prefix)
     {
         $this->session       = $session;
         $this->sessionPrefix = $prefix;

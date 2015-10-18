@@ -70,7 +70,7 @@ class NotifyServiceProvider extends ServiceProvider
         $this->registerConfig();
 
         $this->bind(
-            Contracts\SessionStoreContract::class,
+            Contracts\SessionStoreInterface::class,
             Session::class
         );
 
@@ -79,7 +79,7 @@ class NotifyServiceProvider extends ServiceProvider
              * @var \Illuminate\Foundation\Application  $app
              * @var \Illuminate\Config\Repository       $config
              */
-            $session = $app[Contracts\SessionStoreContract::class];
+            $session = $app[Contracts\SessionStoreInterface::class];
             $config  = $app['config'];
 
             return new Notify(
