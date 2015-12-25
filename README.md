@@ -27,14 +27,14 @@
 
 *By [ARCANEDEV&copy;](http://www.arcanedev.net/)*
 
-Flexible flash notifications helper for Laravel 5. 
+Flexible flash notifications helper for Laravel 5.
 
 Feel free to check out the [releases](https://github.com/ARCANEDEV/Notify/releases), [license](LICENSE.md), and [contribution guidelines](CONTRIBUTING.md).
 
 ### Requirements
-    
+
     - PHP >= 5.5.9
-    
+
 ## INSTALLATION
 
 ### Composer
@@ -154,7 +154,8 @@ Simply append to your layout view:
 
   - [ ] Complete Documentation
   - [ ] Examples
-  - [ ] Zurb Foundation 5 support 
+  - [ ] Zurb Foundation 5 support
+  - [ ] Laravel 5.2 support
   - [ ] Laravel 5.0 support
   - [ ] Refactoring
 
@@ -162,7 +163,7 @@ Simply append to your layout view:
   - [x] Laravel 4.2 support
   - [x] Laravel 5.1 support
   - [x] Bootstrap 3 supported
-  
+
 ## Contribution
 
 Any ideas are welcome. Feel free to submit any issues or pull requests, please check the [contribution guidelines](CONTRIBUTING.md).
