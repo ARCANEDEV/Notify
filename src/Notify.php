@@ -1,7 +1,7 @@
 <?php namespace Arcanedev\Notify;
 
-use Arcanedev\Notify\Contracts\NotifyInterface;
-use Arcanedev\Notify\Contracts\SessionStoreInterface;
+use Arcanedev\Notify\Contracts\Notify as NotifyContract;
+use Arcanedev\Notify\Contracts\SessionStore;
 
 /**
  * Class     Notify
@@ -9,7 +9,7 @@ use Arcanedev\Notify\Contracts\SessionStoreInterface;
  * @package  Arcanedev\Notify
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class Notify implements NotifyInterface
+class Notify implements NotifyContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
@@ -20,16 +20,12 @@ class Notify implements NotifyInterface
      *
      * @var string
      */
-    protected $sessionPrefix = '';
+    protected $sessionPrefix;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Properties
-     | ------------------------------------------------------------------------------------------------
-     */
     /**
      * The session writer.
      *
-     * @var SessionStoreInterface
+     * @var \Arcanedev\Notify\Contracts\SessionStore
      */
     private $session;
 
@@ -40,10 +36,10 @@ class Notify implements NotifyInterface
     /**
      * Create a new flash notifier instance.
      *
-     * @param  SessionStoreInterface  $session
-     * @param  string                $prefix
+     * @param  \Arcanedev\Notify\Contracts\SessionStore  $session
+     * @param  string                                    $prefix
      */
-    public function __construct(SessionStoreInterface $session, $prefix)
+    public function __construct(SessionStore $session, $prefix)
     {
         $this->session       = $session;
         $this->sessionPrefix = $prefix;
@@ -123,13 +119,11 @@ class Notify implements NotifyInterface
      */
     public function flash($message, $type = '', array $options = [])
     {
-        $data = [
-            $this->sessionPrefix . 'message' => $message,
-            $this->sessionPrefix . 'type'    => $type,
-            $this->sessionPrefix . 'options' => json_encode($options),
-        ];
-
-        $this->session->flash($data);
+        $this->session->flash([
+            $this->getPrefixedName('message') => $message,
+            $this->getPrefixedName('type')    => $type,
+            $this->getPrefixedName('options') => json_encode($options),
+        ]);
 
         return $this;
     }
@@ -138,6 +132,12 @@ class Notify implements NotifyInterface
      |  Other Functions
      | ------------------------------------------------------------------------------------------------
      */
+
+    private function getPrefixedName($name)
+    {
+        return "{$this->sessionPrefix}.$name";
+    }
+
     /**
      * Get session value.
      *
@@ -147,6 +147,8 @@ class Notify implements NotifyInterface
      */
     private function getSession($name)
     {
-        return $this->session->get($this->sessionPrefix . $name);
+        return $this->session->get(
+            $this->getPrefixedName($name)
+        );
     }
 }
