@@ -1,6 +1,5 @@
 <?php namespace Arcanedev\Notify;
 
-use Arcanedev\Notify\Storage\Session;
 use Arcanedev\Support\PackageServiceProvider as ServiceProvider;
 
 /**
@@ -48,6 +47,17 @@ class NotifyServiceProvider extends ServiceProvider
      | ------------------------------------------------------------------------------------------------
      */
     /**
+     * Register the service provider.
+     */
+    public function register()
+    {
+        $this->registerConfig();
+
+        $this->bindSession();
+        $this->registerNotifyService();
+    }
+
+    /**
      * Boot the package.
      */
     public function boot()
@@ -63,33 +73,6 @@ class NotifyServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the service provider.
-     */
-    public function register()
-    {
-        $this->registerConfig();
-
-        $this->bind(
-            Contracts\SessionStoreInterface::class,
-            Session::class
-        );
-
-        $this->singleton('arcanedev.notify', function ($app) {
-            /**
-             * @var \Illuminate\Foundation\Application  $app
-             * @var \Illuminate\Config\Repository       $config
-             */
-            $session = $app[Contracts\SessionStoreInterface::class];
-            $config  = $app['config'];
-
-            return new Notify(
-                $session,
-                $config->get('notify.session.prefix', 'notifier.')
-            );
-        });
-    }
-
-    /**
      * Get the services provided by the provider.
      *
      * @return array
@@ -97,5 +80,36 @@ class NotifyServiceProvider extends ServiceProvider
     public function provides()
     {
         return ['arcanedev.notify'];
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Services
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Bind the Session Class.
+     */
+    private function bindSession()
+    {
+        $this->bind(
+            \Arcanedev\Notify\Contracts\SessionStore::class,
+            \Arcanedev\Notify\Storage\Session::class
+        );
+    }
+
+    /**
+     * Register the Notify service.
+     */
+    private function registerNotifyService()
+    {
+        $this->singleton('arcanedev.notify', function ($app) {
+            /**  @var \Illuminate\Config\Repository  $config  */
+            $config  = $app['config'];
+
+            return new Notify(
+                $app[\Arcanedev\Notify\Contracts\SessionStore::class],
+                $config->get('notify.session.prefix', 'notifier.')
+            );
+        });
     }
 }
