@@ -34,9 +34,9 @@ class NotifyTest extends TestCase
 
     public function tearDown()
     {
-        parent::tearDown();
-
         unset($this->notify);
+
+        parent::tearDown();
     }
 
     /* ------------------------------------------------------------------------------------------------

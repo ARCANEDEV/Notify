@@ -32,23 +32,20 @@ class NotifyServiceProviderTest extends TestCase
 
     public function tearDown()
     {
-        parent::tearDown();
-
         unset($this->provider);
+
+        parent::tearDown();
     }
 
     /* ------------------------------------------------------------------------------------------------
      |  Test Functions
      | ------------------------------------------------------------------------------------------------
      */
-    /**
-     * @test
-     */
-    public function testCanGetWhatHeProvides()
+    /** @test */
+    public function it_can_provides()
     {
-        // This is for 100% code converge
-        $this->assertEquals([
-            'arcanedev.notify'
-        ], $this->provider->provides());
+        $expected = ['arcanedev.notify'];
+
+        $this->assertEquals($expected, $this->provider->provides());
     }
 }
