@@ -1,12 +1,12 @@
 <?php namespace Arcanedev\Notify\Contracts;
 
 /**
- * Interface  NotifyInterface
+ * Interface  Notify
  *
  * @package   Arcanedev\Notify\Contracts
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface NotifyInterface
+interface Notify
 {
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters

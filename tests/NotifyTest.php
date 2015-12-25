@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\Notify\Tests;
 
-use Arcanedev\Notify\Contracts\SessionStoreInterface;
+use Arcanedev\Notify\Contracts\SessionStore;
 use Arcanedev\Notify\Notify;
 use Prophecy\Argument;
 
@@ -27,16 +27,16 @@ class NotifyTest extends TestCase
     {
         parent::setUp();
 
-        $this->notify  = new Notify(app(SessionStoreInterface::class), $this->sessionPrefix);
+        $this->notify  = new Notify(app(SessionStore::class), $this->sessionPrefix);
 
         $this->assertFalse($this->notify->ready());
     }
 
     public function tearDown()
     {
-        parent::tearDown();
-
         unset($this->notify);
+
+        parent::tearDown();
     }
 
     /* ------------------------------------------------------------------------------------------------
