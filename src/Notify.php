@@ -2,6 +2,7 @@
 
 use Arcanedev\Notify\Contracts\Notify as NotifyContract;
 use Arcanedev\Notify\Contracts\SessionStore;
+use Illuminate\Support\Arr;
 
 /**
  * Class     Notify
@@ -72,9 +73,9 @@ class Notify implements NotifyContract
     /**
      * Get an additional stored options.
      *
-     * @param  boolean  $assoc
+     * @param  bool  $assoc
      *
-     * @return mixed
+     * @return array
      */
     public function options($assoc = false)
     {
@@ -91,7 +92,19 @@ class Notify implements NotifyContract
      */
     public function option($key, $default = null)
     {
-        return array_get($this->options(true), $key, $default);
+        return Arr::get($this->options(true), $key, $default);
+    }
+
+    /**
+     * Check if the flash notification has an option.
+     *
+     * @param  string  $key
+     *
+     * @return bool
+     */
+    public function hasOption($key)
+    {
+        return Arr::has($this->options(true), $key);
     }
 
     /**
@@ -132,7 +145,13 @@ class Notify implements NotifyContract
      |  Other Functions
      | ------------------------------------------------------------------------------------------------
      */
-
+    /**
+     * Prefix the name.
+     *
+     * @param  string  $name
+     *
+     * @return string
+     */
     private function getPrefixedName($name)
     {
         return "{$this->sessionPrefix}.$name";

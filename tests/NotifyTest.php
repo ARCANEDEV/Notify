@@ -2,7 +2,6 @@
 
 use Arcanedev\Notify\Contracts\SessionStore;
 use Arcanedev\Notify\Notify;
-use Prophecy\Argument;
 
 /**
  * Class     NotifyTest
@@ -44,6 +43,21 @@ class NotifyTest extends TestCase
      | ------------------------------------------------------------------------------------------------
      */
     /** @test */
+    public function it_can_be_instantiated_via_the_contract()
+    {
+        $this->notify = $this->app->make(\Arcanedev\Notify\Contracts\Notify::class);
+
+        $expectations = [
+            \Arcanedev\Notify\Contracts\Notify::class,
+            \Arcanedev\Notify\Notify::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertInstanceOf($expected, $this->notify);
+        }
+    }
+
+    /** @test */
     public function it_can_flash_a_notification_with_only_message()
     {
         $message = 'Welcome Aboard';
@@ -83,6 +97,9 @@ class NotifyTest extends TestCase
         $this->notify->flash($message, $type, $options);
 
         $this->assertTrue($this->notify->ready());
+        $this->assertTrue($this->notify->hasOption('color'));
+        $this->assertTrue($this->notify->hasOption('position'));
+
         $this->assertEquals($message,             $this->notify->message());
         $this->assertEquals($type,                $this->notify->type());
         $this->assertEquals($options,             $this->notify->options(true));

@@ -2,7 +2,6 @@
 
 use Arcanedev\Notify\Contracts\SessionStore;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 
 /**
@@ -34,6 +33,8 @@ abstract class TestCase extends BaseTestCase
     public function setUp()
     {
         parent::setUp();
+
+        $this->app->loadDeferredProviders();
 
         $this->sessionPrefix = config('notify.session.prefix', 'notifier.');
     }
@@ -73,28 +74,5 @@ abstract class TestCase extends BaseTestCase
         return [
             'Notify' => \Arcanedev\Notify\Facades\Notify::class,
         ];
-    }
-
-    /**
-     * Define environment setup.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     */
-    protected function getEnvironmentSetUp($app)
-    {
-        //
-    }
-
-    /**
-     * Call artisan command and return code.
-     *
-     * @param  string  $command
-     * @param  array   $parameters
-     *
-     * @return int
-     */
-    public function artisan($command, $parameters = [])
-    {
-        // TODO: Implement artisan() method.
     }
 }

@@ -15,18 +15,18 @@ class NotifyServiceProvider extends ServiceProvider
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Vendor name.
-     *
-     * @var string
-     */
-    protected $vendor   = 'arcanedev';
-
-    /**
      * Package name.
      *
      * @var string
      */
     protected $package  = 'notify';
+
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = true;
 
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
@@ -64,12 +64,7 @@ class NotifyServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        $viewPath = $this->getBasePath() . '/resources/views';
-
-        $this->loadViewsFrom($viewPath, $this->package);
-        $this->publishes([
-            $viewPath => base_path('resources/views/vendor/' . $this->package),
-        ], 'views');
+        $this->publishConfig();
     }
 
     /**
@@ -79,7 +74,10 @@ class NotifyServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['arcanedev.notify'];
+        return [
+            'arcanedev.notify',
+            Contracts\Notify::class,
+        ];
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -91,10 +89,7 @@ class NotifyServiceProvider extends ServiceProvider
      */
     private function bindSession()
     {
-        $this->bind(
-            \Arcanedev\Notify\Contracts\SessionStore::class,
-            \Arcanedev\Notify\Storage\Session::class
-        );
+        $this->bind(Contracts\SessionStore::class, Storage\Session::class);
     }
 
     /**
@@ -107,9 +102,11 @@ class NotifyServiceProvider extends ServiceProvider
             $config  = $app['config'];
 
             return new Notify(
-                $app[\Arcanedev\Notify\Contracts\SessionStore::class],
+                $app[Contracts\SessionStore::class],
                 $config->get('notify.session.prefix', 'notifier.')
             );
         });
+
+        $this->bind(Contracts\Notify::class, 'arcanedev.notify');
     }
 }
