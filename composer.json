@@ -1,6 +1,6 @@
 {
     "name":        "arcanedev/notify",
-    "description": "Easy notifications and flash messages Helper",
+    "description": "Flexible flash notifications helper for Laravel.",
     "keywords":    ["arcanedev", "notify", "flash", "sweetalert", "sweet-alert", "laravel"],
     "homepage":    "https://github.com/ARCANEDEV/Notify",
     "authors": [
@@ -14,7 +14,7 @@
     "type":    "library",
     "license": "MIT",
     "require": {
-        "php":               ">=5.5.9",
+        "php":               ">=5.6",
         "arcanedev/support": "~3.0"
     },
     "require-dev": {
@@ -37,7 +37,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.2-dev"
+            "dev-master": "3.3-dev"
         }
     }
 }
