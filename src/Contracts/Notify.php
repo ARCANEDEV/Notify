@@ -46,6 +46,15 @@ interface Notify
     public function option($key, $default = null);
 
     /**
+     * Check if the flash notification has an option.
+     *
+     * @param  string  $key
+     *
+     * @return bool
+     */
+    public function hasOption($key);
+
+    /**
      * If the notification is ready to be shown.
      *
      * @return bool
