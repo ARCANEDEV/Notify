@@ -13,19 +13,25 @@
 
 *By [ARCANEDEV&copy;](http://www.arcanedev.net/)*
 
-Flexible flash notifications helper for Laravel 5.
+Flexible flash notifications helper for Laravel.
 
 Feel free to check out the [releases](https://github.com/ARCANEDEV/Notify/releases), [license](LICENSE.md), and [contribution guidelines](CONTRIBUTING.md).
 
-### DONE:
-  - [x] Laravel 4.2 supported.
-  - [x] Laravel 5.0 supported.
-  - [x] Laravel 5.1 supported.
-  - [x] Laravel 5.2 supported.
+## Features
 
-### TODOS:
+  * Easy setup &amp; configuration.
+  * Well documented &amp; IDE Friendly.
+  * Well tested with maximum code quality.
+  * Laravel `4.2| 5.0 | 5.1 | 5.2 | 5.3` are supported.
+  * Made with :heart: &amp; :coffee:.
 
-  - [ ] Complete Documentation.
+## Table of contents
+
+  0. [Home](_docs/0-Requirements.md)
+  1. [Requirements](_docs/1-Requirements.md)
+  3. [Installation and Setup](_docs/2-Installation-and-Setup.md)
+  4. [Configuration](_docs/3-Configuration.md)
+  5. [Usage](_docs/4-Usage.md)
 
 ## Contribution
 
@@ -41,7 +47,7 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 - [All Contributors][link-contributors]
 
 [badge_license]:   http://img.shields.io/packagist/l/arcanedev/notify.svg?style=flat-square
-[badge_laravel]:   https://img.shields.io/badge/For%20Laravel-5.x-orange.svg?style=flat-square
+[badge_laravel]:   https://img.shields.io/badge/Laravel-4.2|5.x-orange.svg?style=flat-square
 [badge_build]:     http://img.shields.io/travis/ARCANEDEV/Notify.svg?style=flat-square
 [badge_hhvm]:      https://img.shields.io/hhvm/arcanedev/notify.svg?style=flat-square
 [badge_coverage]:  https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/Notify.svg?style=flat-square
