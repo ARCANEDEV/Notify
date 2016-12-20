@@ -75,8 +75,8 @@ class NotifyServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            'arcanedev.notify',
             Contracts\Notify::class,
+            'arcanedev.notify',
         ];
     }
 
@@ -97,9 +97,9 @@ class NotifyServiceProvider extends ServiceProvider
      */
     private function registerNotifyService()
     {
-        $this->singleton('arcanedev.notify', function ($app) {
+        $this->singleton(Contracts\Notify::class, function ($app) {
             /**  @var \Illuminate\Config\Repository  $config  */
-            $config  = $app['config'];
+            $config = $app['config'];
 
             return new Notify(
                 $app[Contracts\SessionStore::class],
@@ -107,6 +107,6 @@ class NotifyServiceProvider extends ServiceProvider
             );
         });
 
-        $this->bind(Contracts\Notify::class, 'arcanedev.notify');
+        $this->singleton('arcanedev.notify', Contracts\Notify::class);
     }
 }

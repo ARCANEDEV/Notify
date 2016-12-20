@@ -45,8 +45,8 @@ class NotifyServiceProviderTest extends TestCase
     public function it_can_provides()
     {
         $expected = [
-            'arcanedev.notify',
             \Arcanedev\Notify\Contracts\Notify::class,
+            'arcanedev.notify',
         ];
 
         $this->assertEquals($expected, $this->provider->provides());
