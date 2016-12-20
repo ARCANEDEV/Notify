@@ -13,10 +13,10 @@ if ( ! function_exists('notify')) {
     function notify($message = null, $type = 'info', array $options = [])
     {
         /** @var  Arcanedev\Notify\Contracts\Notify  $notifier */
-        $notifier = app(\Arcanedev\Notify\Contracts\Notify::class);
+        $notifier = app(Arcanedev\Notify\Contracts\Notify::class);
 
-        if ( ! is_null($message)) $notifier->flash($message, $type, $options);
-
-        return $notifier;
+        return is_null($message)
+            ? $notifier
+            : $notifier->flash($message, $type, $options);
     }
 }

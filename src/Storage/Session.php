@@ -48,13 +48,10 @@ class Session implements SessionStore
      */
     public function flash($key, $value = null)
     {
-        if (is_array($key)) {
+        if (is_array($key))
             $this->flashMany($key);
-
-            return;
-        }
-
-        $this->session->flash($key, $value);
+        else
+            $this->session->flash($key, $value);
     }
 
     /**
