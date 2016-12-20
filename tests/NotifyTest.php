@@ -71,6 +71,19 @@ class NotifyTest extends TestCase
     }
 
     /** @test */
+    public function it_can_flash_a_notification_with_facade()
+    {
+        $message = 'Welcome Aboard';
+
+        \Arcanedev\Notify\Facades\Notify::flash($message);
+
+        $this->assertTrue($this->notify->ready());
+        $this->assertEquals($message, $this->notify->message());
+        $this->assertEmpty($this->notify->type());
+        $this->assertEmpty($this->notify->options());
+    }
+
+    /** @test */
     public function it_can_flash_notification_with_type()
     {
         $message = 'Welcome Aboard';

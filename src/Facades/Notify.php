@@ -11,9 +11,12 @@ use Illuminate\Support\Facades\Facade as Facade;
 class Notify extends Facade
 {
     /**
-     * Get the binding in the IoC container
+     * Get the registered name of the component.
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'arcanedev.notify'; }
+    protected static function getFacadeAccessor()
+    {
+        return \Arcanedev\Notify\Contracts\Notify::class;
+    }
 }
