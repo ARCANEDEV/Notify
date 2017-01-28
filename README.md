@@ -21,7 +21,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/Notify/releas
   * Easy setup &amp; configuration.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
-  * Laravel `4.2| 5.0 | 5.1 | 5.2 | 5.3` are supported.
+  * Laravel `4.2| 5.0 | 5.1 | 5.2 | 5.3 | 5.4` are supported.
   * Made with :heart: &amp; :coffee:.
 
 ## Table of contents
