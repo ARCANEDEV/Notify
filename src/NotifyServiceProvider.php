@@ -19,7 +19,7 @@ class NotifyServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $package  = 'notify';
+    protected $package = 'notify';
 
     /**
      * Indicates if loading of the provider is deferred.
