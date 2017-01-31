@@ -1,12 +1,11 @@
-# 4. Usage
+# 3. Usage
 
 ## Table of contents
 
-0. [Home](0-Home.md)
-1. [Requirements](1-Requirements.md)
-2. [Installation and Setup](2-Installation-and-Setup.md)
-3. [Configuration](3-Configuration.md)
-4. [Usage](4-Usage.md)
+  0. [Home](0-Home.md)
+  1. [Installation and Setup](1-Installation-and-Setup.md)
+  2. [Configuration](2-Configuration.md)
+  3. [Usage](3-Usage.md)
 
 #### Basic Usage
 

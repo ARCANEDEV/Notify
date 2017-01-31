@@ -26,11 +26,10 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/Notify/releas
 
 ## Table of contents
 
-  0. [Home](_docs/0-Requirements.md)
-  1. [Requirements](_docs/1-Requirements.md)
-  3. [Installation and Setup](_docs/2-Installation-and-Setup.md)
-  4. [Configuration](_docs/3-Configuration.md)
-  5. [Usage](_docs/4-Usage.md)
+  0. [Home](_docs/0-Home.md)
+  1. [Installation and Setup](_docs/1-Installation-and-Setup.md)
+  2. [Configuration](_docs/2-Configuration.md)
+  3. [Usage](_docs/3-Usage.md)
 
 ## Contribution
 

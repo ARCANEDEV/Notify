@@ -12,7 +12,6 @@ Flexible flash notifications helper for Laravel.
 
 ## Table of contents
 
-  1. [Requirements](1-Requirements.md)
-  3. [Installation and Setup](2-Installation-and-Setup.md)
-  4. [Configuration](3-Configuration.md)
-  5. [Usage](4-Usage.md)
+  1. [Installation and Setup](1-Installation-and-Setup.md)
+  2. [Configuration](2-Configuration.md)
+  3. [Usage](3-Usage.md)
