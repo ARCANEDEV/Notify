@@ -76,7 +76,6 @@ class NotifyServiceProvider extends ServiceProvider
     {
         return [
             Contracts\Notify::class,
-            'arcanedev.notify',
         ];
     }
 
@@ -106,7 +105,5 @@ class NotifyServiceProvider extends ServiceProvider
                 $config->get('notify.session.prefix', 'notifier.')
             );
         });
-
-        $this->singleton('arcanedev.notify', Contracts\Notify::class);
     }
 }
