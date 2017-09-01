@@ -1,7 +1,7 @@
 <?php namespace Arcanedev\Notify\Storage;
 
 use Arcanedev\Notify\Contracts\SessionStore;
-use Illuminate\Session\Store as IlluminateSession;
+use Illuminate\Contracts\Session\Session as SessionContract;
 
 /**
  * Class     Session
@@ -19,7 +19,7 @@ class Session implements SessionStore
     /**
      * The Illuminate Session instance.
      *
-     * @var \Illuminate\Session\Store
+     * @var \Illuminate\Contracts\Session\Session
      */
     private $session;
 
@@ -31,9 +31,9 @@ class Session implements SessionStore
     /**
      * Make session store instance.
      *
-     * @param  \Illuminate\Session\Store  $session
+     * @param  \Illuminate\Contracts\Session\Session  $session
      */
-    public function __construct(IlluminateSession $session)
+    public function __construct(SessionContract $session)
     {
         $this->session = $session;
     }
