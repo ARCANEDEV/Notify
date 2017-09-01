@@ -2,7 +2,6 @@
 
 ## Table of contents
 
-  0. [Home](0-Home.md)
   1. [Installation and Setup](1-Installation-and-Setup.md)
   2. [Configuration](2-Configuration.md)
   3. [Usage](3-Usage.md)

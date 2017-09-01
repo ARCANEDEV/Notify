@@ -10,19 +10,19 @@ use Arcanedev\Notify\NotifyServiceProvider;
  */
 class NotifyServiceProviderTest extends TestCase
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
-    /**
-     * @var NotifyServiceProvider
-     */
+
+    /** @var \Arcanedev\Notify\NotifyServiceProvider */
     private $provider;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -37,10 +37,26 @@ class NotifyServiceProviderTest extends TestCase
         parent::tearDown();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Test Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Tests
+     | -----------------------------------------------------------------
      */
+
+    /** @test */
+    public function it_can_be_instantiated()
+    {
+        $expectations = [
+            \Illuminate\Support\ServiceProvider::class,
+            \Arcanedev\Support\ServiceProvider::class,
+            \Arcanedev\Support\PackageServiceProvider::class,
+            \Arcanedev\Notify\NotifyServiceProvider::class,
+        ];
+
+        foreach ($expectations as $expected) {
+            $this->assertInstanceOf($expected, $this->provider);
+        }
+    }
+
     /** @test */
     public function it_can_provides()
     {

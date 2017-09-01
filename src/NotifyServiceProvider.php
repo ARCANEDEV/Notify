@@ -10,10 +10,11 @@ use Arcanedev\Support\PackageServiceProvider as ServiceProvider;
  */
 class NotifyServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Package name.
      *
@@ -29,20 +30,6 @@ class NotifyServiceProvider extends ServiceProvider
     protected $defer = true;
 
     /* ------------------------------------------------------------------------------------------------
-     |  Getters & Setters
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Get the base path of the package.
-     *
-     * @return string
-     */
-    public function getBasePath()
-    {
-        return dirname(__DIR__);
-    }
-
-    /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
@@ -51,6 +38,8 @@ class NotifyServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        parent::register();
+
         $this->registerConfig();
 
         $this->bindSession();

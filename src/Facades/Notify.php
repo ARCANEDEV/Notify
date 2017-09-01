@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\Notify\Facades;
 
+use Arcanedev\Notify\Contracts\Notify as NotifyContract;
 use Illuminate\Support\Facades\Facade as Facade;
 
 /**
@@ -15,8 +16,5 @@ class Notify extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor()
-    {
-        return \Arcanedev\Notify\Contracts\Notify::class;
-    }
+    protected static function getFacadeAccessor() { return NotifyContract::class; }
 }
