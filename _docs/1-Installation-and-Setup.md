@@ -23,6 +23,7 @@ The Notify package has a few system requirements:
 | ![Notify v3.3.x][notify_3_3_x] | ![Laravel v5.4][laravel_5_4]                                                                                        |
 | ![Notify v3.4.x][notify_3_4_x] | ![Laravel v5.5][laravel_5_5]                                                                                        |
 | ![Notify v3.5.x][notify_3_5_x] | ![Laravel v5.6][laravel_5_6]                                                                                        |
+| ![Notify v3.6.x][notify_3_6_x] | ![Laravel v5.7][laravel_5_7]                                                                                        |
 
 [laravel_4_2]:  https://img.shields.io/badge/v4.2-supported-brightgreen.svg?style=flat-square "Laravel v4.2"
 [laravel_5_0]:  https://img.shields.io/badge/v5.0-supported-brightgreen.svg?style=flat-square "Laravel v5.0"
@@ -32,12 +33,14 @@ The Notify package has a few system requirements:
 [laravel_5_4]:  https://img.shields.io/badge/v5.4-supported-brightgreen.svg?style=flat-square "Laravel v5.4"
 [laravel_5_5]:  https://img.shields.io/badge/v5.5-supported-brightgreen.svg?style=flat-square "Laravel v5.5"
 [laravel_5_6]:  https://img.shields.io/badge/v5.6-supported-brightgreen.svg?style=flat-square "Laravel v5.6"
+[laravel_5_7]:  https://img.shields.io/badge/v5.7-supported-brightgreen.svg?style=flat-square "Laravel v5.7"
 
 [notify_1_x]:   https://img.shields.io/badge/version-1.*-blue.svg?style=flat-square "Notify v1.*"
 [notify_3_2_x]: https://img.shields.io/badge/version-3.2.*-blue.svg?style=flat-square "Notify v3.2.*"
 [notify_3_3_x]: https://img.shields.io/badge/version-3.3.*-blue.svg?style=flat-square "Notify v3.3.*"
 [notify_3_4_x]: https://img.shields.io/badge/version-3.4.*-blue.svg?style=flat-square "Notify v3.4.*"
 [notify_3_5_x]: https://img.shields.io/badge/version-3.5.*-blue.svg?style=flat-square "Notify v3.5.*"
+[notify_3_6_x]: https://img.shields.io/badge/version-3.6.*-blue.svg?style=flat-square "Notify v3.6.*"
 
 ## Composer
 
