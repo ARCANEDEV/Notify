@@ -54,18 +54,4 @@ abstract class TestCase extends BaseTestCase
             \Arcanedev\Notify\NotifyServiceProvider::class,
         ];
     }
-
-    /**
-     * Get package aliases.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     *
-     * @return array
-     */
-    protected function getPackageAliases($app)
-    {
-        return [
-            'Notify' => \Arcanedev\Notify\Facades\Notify::class,
-        ];
-    }
 }

@@ -22,6 +22,7 @@ The Notify package has a few system requirements:
 | ![Notify v3.2.x][notify_3_2_x] | ![Laravel v5.0][laravel_5_0] ![Laravel v5.1][laravel_5_1] ![Laravel v5.2][laravel_5_2] ![Laravel v5.3][laravel_5_3] |
 | ![Notify v3.3.x][notify_3_3_x] | ![Laravel v5.4][laravel_5_4]                                                                                        |
 | ![Notify v3.4.x][notify_3_4_x] | ![Laravel v5.5][laravel_5_5]                                                                                        |
+| ![Notify v3.5.x][notify_3_5_x] | ![Laravel v5.6][laravel_5_6]                                                                                        |
 
 [laravel_4_2]:  https://img.shields.io/badge/v4.2-supported-brightgreen.svg?style=flat-square "Laravel v4.2"
 [laravel_5_0]:  https://img.shields.io/badge/v5.0-supported-brightgreen.svg?style=flat-square "Laravel v5.0"
@@ -30,11 +31,13 @@ The Notify package has a few system requirements:
 [laravel_5_3]:  https://img.shields.io/badge/v5.3-supported-brightgreen.svg?style=flat-square "Laravel v5.3"
 [laravel_5_4]:  https://img.shields.io/badge/v5.4-supported-brightgreen.svg?style=flat-square "Laravel v5.4"
 [laravel_5_5]:  https://img.shields.io/badge/v5.5-supported-brightgreen.svg?style=flat-square "Laravel v5.5"
+[laravel_5_6]:  https://img.shields.io/badge/v5.6-supported-brightgreen.svg?style=flat-square "Laravel v5.6"
 
 [notify_1_x]:   https://img.shields.io/badge/version-1.*-blue.svg?style=flat-square "Notify v1.*"
 [notify_3_2_x]: https://img.shields.io/badge/version-3.2.*-blue.svg?style=flat-square "Notify v3.2.*"
 [notify_3_3_x]: https://img.shields.io/badge/version-3.3.*-blue.svg?style=flat-square "Notify v3.3.*"
 [notify_3_4_x]: https://img.shields.io/badge/version-3.4.*-blue.svg?style=flat-square "Notify v3.4.*"
+[notify_3_5_x]: https://img.shields.io/badge/version-3.5.*-blue.svg?style=flat-square "Notify v3.5.*"
 
 ## Composer
 
@@ -55,17 +58,6 @@ Once the package is installed, you can register the service provider in `config/
     ...
     Arcanedev\Notify\NotifyServiceProvider::class,
 ],
-```
-
-(**Optional**) And for the Facades:
-
-```php
-// config/app.php
-
-'aliases' => [
-    ...
-    'Notify' => Arcanedev\Notify\Facades\Notify::class,
-];
 ```
 
 ### Artisan commands

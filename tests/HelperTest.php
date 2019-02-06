@@ -17,7 +17,7 @@ class HelperTest extends TestCase
     {
         parent::setUp();
 
-        $this->assertFalse(notify()->ready());
+        static::assertFalse(notify()->ready());
     }
 
     /* -----------------------------------------------------------------
@@ -30,10 +30,10 @@ class HelperTest extends TestCase
     {
         notify($message = 'Welcome Aboard');
 
-        $this->assertTrue(notify()->ready());
-        $this->assertSame($message, notify()->message());
-        $this->assertSame('info',   notify()->type());
-        $this->assertEmpty(notify()->options());
+        static::assertTrue(notify()->ready());
+        static::assertSame($message, notify()->message());
+        static::assertSame('info',   notify()->type());
+        static::assertEmpty(notify()->options());
     }
 
     /** @test */
@@ -41,10 +41,10 @@ class HelperTest extends TestCase
     {
         notify($message = "You've got an error!", $type = 'danger');
 
-        $this->assertTrue(notify()->ready());
-        $this->assertSame($message, notify()->message());
-        $this->assertSame($type,    notify()->type());
-        $this->assertEmpty(notify()->options());
+        static::assertTrue(notify()->ready());
+        static::assertSame($message, notify()->message());
+        static::assertSame($type,    notify()->type());
+        static::assertEmpty(notify()->options());
     }
 
     /** @test */
@@ -52,10 +52,10 @@ class HelperTest extends TestCase
     {
         notify()->flash($message = 'Welcome Aboard');
 
-        $this->assertTrue(notify()->ready());
-        $this->assertSame($message, notify()->message());
-        $this->assertEmpty(notify()->type());
-        $this->assertEmpty(notify()->options());
+        static::assertTrue(notify()->ready());
+        static::assertSame($message, notify()->message());
+        static::assertEmpty(notify()->type());
+        static::assertEmpty(notify()->options());
     }
 
     /** @test */
@@ -66,10 +66,10 @@ class HelperTest extends TestCase
 
         notify()->flash($message, $type);
 
-        $this->assertTrue(notify()->ready());
-        $this->assertSame($message, notify()->message());
-        $this->assertSame($type,    notify()->type());
-        $this->assertEmpty(notify()->options());
+        static::assertTrue(notify()->ready());
+        static::assertSame($message, notify()->message());
+        static::assertSame($type,    notify()->type());
+        static::assertEmpty(notify()->options());
     }
 
     /** @test */
@@ -84,11 +84,11 @@ class HelperTest extends TestCase
 
         notify()->flash($message, $type, $options);
 
-        $this->assertTrue(notify()->ready());
-        $this->assertSame($message,             notify()->message());
-        $this->assertSame($type,                notify()->type());
-        $this->assertSame($options,             notify()->options(true));
-        $this->assertSame($options['color'],    notify()->option('color'));
-        $this->assertSame($options['position'], notify()->option('position'));
+        static::assertTrue(notify()->ready());
+        static::assertSame($message,             notify()->message());
+        static::assertSame($type,                notify()->type());
+        static::assertSame($options,             notify()->options(true));
+        static::assertSame($options['color'],    notify()->option('color'));
+        static::assertSame($options['position'], notify()->option('position'));
     }
 }

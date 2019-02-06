@@ -30,7 +30,7 @@ class NotifyTest extends TestCase
 
         $this->notify  = new Notify(app(SessionStore::class), $this->sessionPrefix);
 
-        $this->assertFalse($this->notify->ready());
+        static::assertFalse($this->notify->ready());
     }
 
     public function tearDown()
@@ -56,7 +56,7 @@ class NotifyTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->notify);
+            static::assertInstanceOf($expected, $this->notify);
         }
     }
 
@@ -67,23 +67,10 @@ class NotifyTest extends TestCase
 
         $this->notify->flash($message);
 
-        $this->assertTrue($this->notify->ready());
-        $this->assertEquals($message, $this->notify->message());
-        $this->assertEmpty($this->notify->type());
-        $this->assertEmpty($this->notify->options());
-    }
-
-    /** @test */
-    public function it_can_flash_a_notification_with_facade()
-    {
-        $message = 'Welcome Aboard';
-
-        \Arcanedev\Notify\Facades\Notify::flash($message);
-
-        $this->assertTrue($this->notify->ready());
-        $this->assertEquals($message, $this->notify->message());
-        $this->assertEmpty($this->notify->type());
-        $this->assertEmpty($this->notify->options());
+        static::assertTrue($this->notify->ready());
+        static::assertEquals($message, $this->notify->message());
+        static::assertEmpty($this->notify->type());
+        static::assertEmpty($this->notify->options());
     }
 
     /** @test */
@@ -94,10 +81,10 @@ class NotifyTest extends TestCase
 
         $this->notify->flash($message, $type);
 
-        $this->assertTrue($this->notify->ready());
-        $this->assertEquals($message, $this->notify->message());
-        $this->assertEquals($type,    $this->notify->type());
-        $this->assertEmpty($this->notify->options());
+        static::assertTrue($this->notify->ready());
+        static::assertEquals($message, $this->notify->message());
+        static::assertEquals($type,    $this->notify->type());
+        static::assertEmpty($this->notify->options());
     }
 
     /** @test */
@@ -112,14 +99,14 @@ class NotifyTest extends TestCase
 
         $this->notify->flash($message, $type, $options);
 
-        $this->assertTrue($this->notify->ready());
-        $this->assertTrue($this->notify->hasOption('color'));
-        $this->assertTrue($this->notify->hasOption('position'));
+        static::assertTrue($this->notify->ready());
+        static::assertTrue($this->notify->hasOption('color'));
+        static::assertTrue($this->notify->hasOption('position'));
 
-        $this->assertEquals($message,             $this->notify->message());
-        $this->assertEquals($type,                $this->notify->type());
-        $this->assertEquals($options,             $this->notify->options(true));
-        $this->assertEquals($options['color'],    $this->notify->option('color'));
-        $this->assertEquals($options['position'], $this->notify->option('position'));
+        static::assertEquals($message,             $this->notify->message());
+        static::assertEquals($type,                $this->notify->type());
+        static::assertEquals($options,             $this->notify->options(true));
+        static::assertEquals($options['color'],    $this->notify->option('color'));
+        static::assertEquals($options['position'], $this->notify->option('position'));
     }
 }
