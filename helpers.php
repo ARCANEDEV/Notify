@@ -1,5 +1,7 @@
 <?php
 
+use Arcanedev\Notify\Contracts\Notify;
+
 if ( ! function_exists('notify')) {
     /**
      * Notify Helper function.
@@ -13,7 +15,7 @@ if ( ! function_exists('notify')) {
     function notify($message = null, $type = 'info', array $options = [])
     {
         /** @var  Arcanedev\Notify\Contracts\Notify  $notifier */
-        $notifier = app(Arcanedev\Notify\Contracts\Notify::class);
+        $notifier = app(Notify::class);
 
         return is_null($message)
             ? $notifier

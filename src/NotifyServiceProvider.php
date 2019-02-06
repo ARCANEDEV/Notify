@@ -91,7 +91,7 @@ class NotifyServiceProvider extends ServiceProvider
 
             return new Notify(
                 $app[Contracts\SessionStore::class],
-                $config->get('notify.session.prefix', 'notifier.')
+                $config->get('notify.session.prefix', 'notifier')
             );
         });
     }

@@ -132,7 +132,7 @@ class Notify implements NotifyContract
      * @param  string  $type
      * @param  array   $options
      *
-     * @return self
+     * @return $this
      */
     public function flash($message, $type = '', array $options = [])
     {

@@ -74,7 +74,7 @@ interface Notify
      * @param  string  $type
      * @param  array   $options
      *
-     * @return self
+     * @return $this
      */
     public function flash($message, $type = null, array $options = []);
 }
