@@ -49,7 +49,7 @@ class Session implements SessionStore
      * @param  string|array  $key
      * @param  mixed         $value
      */
-    public function flash($key, $value = null)
+    public function flash($key, $value = true)
     {
         if (is_array($key))
             $this->flashMany($key);
@@ -60,7 +60,7 @@ class Session implements SessionStore
     /**
      * Flash multiple key/value pairs.
      *
-     * @param  array  $data
+     * @param  \iterable|array  $data
      */
     public function flashMany($data)
     {
