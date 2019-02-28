@@ -128,17 +128,17 @@ class Notify implements NotifyContract
     /**
      * Flash a message.
      *
-     * @param  string  $message
-     * @param  string  $type
-     * @param  array   $options
+     * @param  string       $message
+     * @param  string|null  $type
+     * @param  array        $options
      *
      * @return $this
      */
-    public function flash($message, $type = '', array $options = [])
+    public function flash($message, $type = null, array $options = [])
     {
         $this->session->flash([
             $this->getPrefixedName('message') => $message,
-            $this->getPrefixedName('type')    => $type,
+            $this->getPrefixedName('type')    => $type ?: '',
             $this->getPrefixedName('options') => json_encode($options),
         ]);
 

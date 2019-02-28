@@ -24,7 +24,7 @@ class NotifyTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -33,7 +33,7 @@ class NotifyTest extends TestCase
         static::assertFalse($this->notify->ready());
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->notify);
 

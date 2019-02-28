@@ -19,7 +19,7 @@ interface SessionStore
      * @param  string|array  $key
      * @param  mixed         $value
      */
-    public function flash($key, $value = null);
+    public function flash($key, $value = true);
 
     /**
      * Flash multiple key/value pairs.
