@@ -8,17 +8,15 @@ if ( ! function_exists('notify')) {
      *
      * @param  string|null  $message
      * @param  string       $type
-     * @param  array        $options
+     * @param  array        $extra
      *
      * @return \Arcanedev\Notify\Contracts\Notify
      */
-    function notify($message = null, $type = 'info', array $options = [])
+    function notify($message = null, $type = 'info', array $extra = [])
     {
         /** @var  Arcanedev\Notify\Contracts\Notify  $notifier */
         $notifier = app(Notify::class);
 
-        return is_null($message)
-            ? $notifier
-            : $notifier->flash($message, $type, $options);
+        return is_null($message) ? $notifier : $notifier->flash($message, $type, $extra);
     }
 }

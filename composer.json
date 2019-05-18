@@ -1,7 +1,7 @@
 {
     "name":        "arcanedev/notify",
     "description": "Flexible flash notifications helper for Laravel.",
-    "keywords":    ["arcanedev", "notify", "flash", "sweetalert", "sweet-alert", "laravel"],
+    "keywords":    ["arcanedev", "laravel", "notify", "flash", "notifications", "alerts"],
     "homepage":    "https://github.com/ARCANEDEV/Notify",
     "authors": [
         {
@@ -38,10 +38,7 @@
         "laravel": {
             "providers": [
                 "Arcanedev\\Notify\\NotifyServiceProvider"
-            ],
-            "aliases": {
-                "Notify": "Arcanedev\\Notify\\Facades\\Notify"
-            }
+            ]
         }
     }
 }

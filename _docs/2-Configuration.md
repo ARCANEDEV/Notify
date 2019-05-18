@@ -9,16 +9,34 @@
 After you've published the config file `config/notify.php`, you can customize the settings :
 
 ```php
+<?php
+
 return [
+
     /* -----------------------------------------------------------------
-     |  Session
+     |  Default Store
      | -----------------------------------------------------------------
      */
-    
-    'session' => [
-        'prefix' => 'notifier'
+
+    'default' => 'session',
+
+    /* -----------------------------------------------------------------
+     |  Supported Stores
+     | -----------------------------------------------------------------
+     */
+
+    'stores'  => [
+
+        'session' => [
+            'driver'  => Arcanedev\Notify\Stores\SessionStore::class,
+            'options' => [
+                'key' => 'notifications'
+            ],
+        ],
+
     ],
+
 ];
 ```
 
-The `prefix` value is the session prefix name for all your flash notifications.
+You can create you own store like `database` or `redis` store for your notifications.

@@ -43,8 +43,17 @@ class NotifyServiceProvider extends ServiceProvider
 
         $this->registerConfig();
 
-        $this->bindSession();
-        $this->registerNotifyService();
+        $this->singleton(StoreManager::class, function ($app) {
+            return tap(new StoreManager($app), function (StoreManager $manager) {
+                $manager->loadStores();
+            });
+        });
+
+        $this->bind(Contracts\Store::class, function ($app) {
+            return $app[StoreManager::class]->driver();
+        });
+
+        $this->singleton(Contracts\Notify::class, Notify::class);
     }
 
     /**
@@ -67,34 +76,5 @@ class NotifyServiceProvider extends ServiceProvider
         return [
             Contracts\Notify::class,
         ];
-    }
-
-    /* -----------------------------------------------------------------
-     |  Services
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Bind the Session Class.
-     */
-    private function bindSession()
-    {
-        $this->bind(Contracts\SessionStore::class, Storage\Session::class);
-    }
-
-    /**
-     * Register the Notify service.
-     */
-    private function registerNotifyService()
-    {
-        $this->singleton(Contracts\Notify::class, function ($app) {
-            /**  @var \Illuminate\Config\Repository  $config  */
-            $config = $app['config'];
-
-            return new Notify(
-                $app[Contracts\SessionStore::class],
-                $config->get('notify.session.prefix', 'notifier')
-            );
-        });
     }
 }

@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\Notify\Tests;
 
-use Arcanedev\Notify\Contracts\SessionStore;
+use Arcanedev\Notify\Contracts\Store;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 
@@ -24,7 +24,7 @@ abstract class TestCase extends BaseTestCase
      */
     protected $sessionPrefix;
 
-    /** @var SessionStore|ObjectProphecy */
+    /** @var Store|ObjectProphecy */
     protected $session;
 
     /* -----------------------------------------------------------------

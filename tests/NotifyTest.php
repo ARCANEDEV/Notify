@@ -1,7 +1,8 @@
 <?php namespace Arcanedev\Notify\Tests;
 
-use Arcanedev\Notify\Contracts\SessionStore;
+use Arcanedev\Notify\Contracts\Store;
 use Arcanedev\Notify\Notify;
+use Illuminate\Support\Collection;
 
 /**
  * Class     NotifyTest
@@ -28,16 +29,7 @@ class NotifyTest extends TestCase
     {
         parent::setUp();
 
-        $this->notify  = new Notify(app(SessionStore::class), $this->sessionPrefix);
-
-        static::assertFalse($this->notify->ready());
-    }
-
-    public function tearDown(): void
-    {
-        unset($this->notify);
-
-        parent::tearDown();
+        $this->notify  = new Notify($this->app->make(Store::class));
     }
 
     /* -----------------------------------------------------------------
@@ -58,55 +50,144 @@ class NotifyTest extends TestCase
         foreach ($expectations as $expected) {
             static::assertInstanceOf($expected, $this->notify);
         }
+
+        static::assertTrue($this->notify->isEmpty());
+        static::assertFalse($this->notify->isNotEmpty());
     }
 
     /** @test */
     public function it_can_flash_a_notification_with_only_message()
     {
-        $message = 'Welcome Aboard';
+        $this->notify->flash('Welcome Aboard');
 
-        $this->notify->flash($message);
+        static::assertFalse($this->notify->isEmpty());
+        static::assertTrue($this->notify->isNotEmpty());
 
-        static::assertTrue($this->notify->ready());
-        static::assertEquals($message, $this->notify->message());
-        static::assertEmpty($this->notify->type());
-        static::assertEmpty($this->notify->options());
+        $expected = [
+            [
+                'message' => 'Welcome Aboard',
+                'type'    => 'info',
+                'extra'   => [],
+            ]
+        ];
+
+        static::assertInstanceOf(
+            Collection::class,
+            $notifications = $this->notify->notifications()
+        );
+        static::assertEquals($expected, $notifications->toArray());
     }
 
     /** @test */
     public function it_can_flash_notification_with_type()
     {
-        $message = 'Welcome Aboard';
-        $type    = 'info';
+        $this->notify->flash('Welcome Aboard', 'success');
 
-        $this->notify->flash($message, $type);
+        static::assertFalse($this->notify->isEmpty());
+        static::assertTrue($this->notify->isNotEmpty());
 
-        static::assertTrue($this->notify->ready());
-        static::assertEquals($message, $this->notify->message());
-        static::assertEquals($type,    $this->notify->type());
-        static::assertEmpty($this->notify->options());
+        $expected = [
+            [
+                'message' => 'Welcome Aboard',
+                'type'    => 'success',
+                'extra'   => [],
+            ]
+        ];
+
+        static::assertInstanceOf(
+            Collection::class,
+            $notifications = $this->notify->notifications()
+        );
+        static::assertEquals($expected, $notifications->toArray());
     }
 
     /** @test */
-    public function it_can_flash_notification_with_options()
+    public function it_can_flash_notification_with_extra_options()
     {
-        $message = 'Welcome Aboard';
-        $type    = 'success';
-        $options = [
-            'color'     => '#BADA55',
-            'position'  => 'absolute',
+        $this->notify->flash('Welcome Aboard', 'success', [
+            'content' => '<p>It is nice to see you again!</p>',
+            'icon'    => ':tada:',
+        ]);
+
+        static::assertFalse($this->notify->isEmpty());
+        static::assertTrue($this->notify->isNotEmpty());
+
+        $expected = [
+            [
+                'message' => 'Welcome Aboard',
+                'type'    => 'success',
+                'extra'   => [
+                    'content' => '<p>It is nice to see you again!</p>',
+                    'icon'    => ':tada:',
+                ],
+            ]
         ];
 
-        $this->notify->flash($message, $type, $options);
+        static::assertInstanceOf(
+            Collection::class,
+            $notifications = $this->notify->notifications()
+        );
+        static::assertEquals($expected, $notifications->toArray());
+    }
 
-        static::assertTrue($this->notify->ready());
-        static::assertTrue($this->notify->hasOption('color'));
-        static::assertTrue($this->notify->hasOption('position'));
+    /** @test */
+    public function it_can_forget_all_the_notifications()
+    {
+        $this->notify->flash('Welcome Aboard');
 
-        static::assertEquals($message,             $this->notify->message());
-        static::assertEquals($type,                $this->notify->type());
-        static::assertEquals($options,             $this->notify->options(true));
-        static::assertEquals($options['color'],    $this->notify->option('color'));
-        static::assertEquals($options['position'], $this->notify->option('position'));
+        static::assertFalse($this->notify->isEmpty());
+        static::assertTrue($this->notify->isNotEmpty());
+
+        $this->notify->forget();
+
+        static::assertTrue($this->notify->isEmpty());
+        static::assertFalse($this->notify->isNotEmpty());
+        static::assertEmpty($this->notify->notifications());
+    }
+
+    /** @test */
+    public function it_can_flash_with_predefined_types()
+    {
+        $this->notify->info('Info notification', ['icon' => 'info-icon']);
+        $this->notify->success('Success notification', ['icon' => 'success-icon']);
+        $this->notify->error('Error notification', ['icon' => 'error-icon']);
+        $this->notify->warning('Warning notification', ['icon' => 'warning-icon']);
+
+        $expected = [
+            [
+                'message' => 'Info notification',
+                'type'    => 'info',
+                'extra'   => [
+                    'icon' => 'info-icon',
+                ],
+            ],
+            [
+                'message' => 'Success notification',
+                'type'    => 'success',
+                'extra'   => [
+                    'icon' => 'success-icon',
+                ],
+            ],
+            [
+                'message' => 'Error notification',
+                'type'    => 'danger',
+                'extra'   => [
+                    'icon' => 'error-icon',
+                ],
+            ],
+            [
+                'message' => 'Warning notification',
+                'type'    => 'warning',
+                'extra'   => [
+                    'icon' => 'warning-icon',
+                ],
+            ],
+        ];
+
+        static::assertInstanceOf(
+            Collection::class,
+            $notifications = $this->notify->notifications()
+        );
+        static::assertEquals($expected, $notifications->toArray());
     }
 }
