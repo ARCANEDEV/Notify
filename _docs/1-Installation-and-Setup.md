@@ -6,14 +6,6 @@
   2. [Configuration](2-Configuration.md)
   3. [Usage](3-Usage.md)
 
-## Server Requirements
-
-The Notify package has a few system requirements:
-
-```
-- PHP >= 7.0
-```
-
 ## Version Compatibility
 
 | Notify                                                        | Laravel                                                                                                             |
