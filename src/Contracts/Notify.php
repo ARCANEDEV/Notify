@@ -1,5 +1,7 @@
 <?php namespace Arcanedev\Notify\Contracts;
 
+use Illuminate\Support\Collection;
+
 /**
  * Interface  Notify
  *
@@ -14,53 +16,27 @@ interface Notify
      */
 
     /**
-     * Get the notification message.
+     * Get the store.
      *
-     * @return string
+     * @return \Arcanedev\Notify\Contracts\Store
      */
-    public function message();
+    public function store(): Store;
 
     /**
-     * Get the notification type.
+     * Set the store.
      *
-     * @return string
+     * @param  \Arcanedev\Notify\Contracts\Store  $store
+     *
+     * @return \Arcanedev\Notify\Notify
      */
-    public function type();
+    public function setStore(Store $store);
 
     /**
-     * Get an additional stored options.
+     * Get all the notifications.
      *
-     * @param  boolean  $assoc
-     *
-     * @return mixed
+     * @return \Illuminate\Support\Collection
      */
-    public function options($assoc = false);
-
-    /**
-     * Get a notification option.
-     *
-     * @param  string      $key
-     * @param  mixed|null  $default
-     *
-     * @return mixed
-     */
-    public function option($key, $default = null);
-
-    /**
-     * Check if the flash notification has an option.
-     *
-     * @param  string  $key
-     *
-     * @return bool
-     */
-    public function hasOption($key);
-
-    /**
-     * If the notification is ready to be shown.
-     *
-     * @return bool
-     */
-    public function ready();
+    public function notifications(): Collection;
 
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -68,13 +44,74 @@ interface Notify
      */
 
     /**
-     * Flash a message.
+     * Flash an information message.
      *
-     * @param  string       $message
-     * @param  string|null  $type
-     * @param  array        $options
+     * @param  string  $message
+     * @param  array   $extra
+     *
+     * @return \Arcanedev\Notify\Notify
+     */
+    public function info(string $message, array $extra = []);
+
+    /**
+     * Flash a success message.
+     *
+     * @param  string  $message
+     * @param  array   $extra
      *
      * @return $this
      */
-    public function flash($message, $type = null, array $options = []);
+    public function success(string $message, array $extra = []);
+
+    /**
+     * Flash an error message.
+     *
+     * @param  string  $message
+     * @param  array   $extra
+     *
+     * @return $this
+     */
+    public function error(string $message, array $extra = []);
+
+    /**
+     * Flash a warning message.
+     *
+     * @param  string  $message
+     * @param  array   $extra
+     *
+     * @return $this
+     */
+    public function warning(string $message, array $extra = []);
+
+    /**
+     * Flash a new notification.
+     *
+     * @param  string       $message
+     * @param  string|null  $type
+     * @param  array        $extra
+     *
+     * @return $this
+     */
+    public function flash($message, $type = 'info', array $extra = []);
+
+    /**
+     * Forget the notification.
+     *
+     * @return void
+     */
+    public function forget();
+
+    /**
+     * Check if it has notifications.
+     *
+     * @return bool
+     */
+    public function isEmpty(): bool;
+
+    /**
+     * Check if there is no notifications.
+     *
+     * @return bool
+     */
+    public function isNotEmpty(): bool;
 }

@@ -1,8 +1,9 @@
 <?php namespace Arcanedev\Notify;
 
 use Arcanedev\Notify\Contracts\Notify as NotifyContract;
-use Arcanedev\Notify\Contracts\SessionStore;
-use Illuminate\Support\Arr;
+use Arcanedev\Notify\Contracts\Store;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Traits\Macroable;
 
 /**
  * Class     Notify
@@ -13,23 +14,23 @@ use Illuminate\Support\Arr;
 class Notify implements NotifyContract
 {
     /* -----------------------------------------------------------------
+     |  Traits
+     | -----------------------------------------------------------------
+     */
+
+    use Macroable;
+
+    /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
 
     /**
-     * Session prefix name.
-     *
-     * @var string
-     */
-    protected $sessionPrefix;
-
-    /**
      * The session writer.
      *
-     * @var \Arcanedev\Notify\Contracts\SessionStore
+     * @var \Arcanedev\Notify\Contracts\Store
      */
-    private $session;
+    private $store;
 
     /* -----------------------------------------------------------------
      |  Constructor
@@ -39,13 +40,11 @@ class Notify implements NotifyContract
     /**
      * Create a new flash notifier instance.
      *
-     * @param  \Arcanedev\Notify\Contracts\SessionStore  $session
-     * @param  string                                    $prefix
+     * @param  \Arcanedev\Notify\Contracts\Store  $store
      */
-    public function __construct(SessionStore $session, $prefix)
+    public function __construct(Store $store)
     {
-        $this->session       = $session;
-        $this->sessionPrefix = $prefix;
+        $this->setStore($store);
     }
 
     /* -----------------------------------------------------------------
@@ -54,70 +53,37 @@ class Notify implements NotifyContract
      */
 
     /**
-     * Get the notification message.
+     * Get the store.
      *
-     * @return string
+     * @return \Arcanedev\Notify\Contracts\Store
      */
-    public function message()
+    public function store(): Store
     {
-        return $this->getSession('message');
+        return $this->store;
     }
 
     /**
-     * Get the notification type.
+     * Set the store.
      *
-     * @return string
+     * @param  \Arcanedev\Notify\Contracts\Store  $store
+     *
+     * @return $this
      */
-    public function type()
+    public function setStore(Store $store)
     {
-        return $this->getSession('type');
+        $this->store = $store;
+
+        return $this;
     }
 
     /**
-     * Get an additional stored options.
+     * Get all the notifications.
      *
-     * @param  bool  $assoc
-     *
-     * @return array
+     * @return \Illuminate\Support\Collection
      */
-    public function options($assoc = false)
+    public function notifications(): Collection
     {
-        return json_decode($this->getSession('options'), $assoc);
-    }
-
-    /**
-     * Get a notification option.
-     *
-     * @param  string      $key
-     * @param  mixed|null  $default
-     *
-     * @return mixed
-     */
-    public function option($key, $default = null)
-    {
-        return Arr::get($this->options(true), $key, $default);
-    }
-
-    /**
-     * Check if the flash notification has an option.
-     *
-     * @param  string  $key
-     *
-     * @return bool
-     */
-    public function hasOption($key)
-    {
-        return Arr::has($this->options(true), $key);
-    }
-
-    /**
-     * If the notification is ready to be shown.
-     *
-     * @return bool
-     */
-    public function ready()
-    {
-        return ! empty($this->message());
+        return $this->store()->all();
     }
 
     /* -----------------------------------------------------------------
@@ -126,53 +92,100 @@ class Notify implements NotifyContract
      */
 
     /**
-     * Flash a message.
+     * Flash an information message.
      *
-     * @param  string       $message
-     * @param  string|null  $type
-     * @param  array        $options
+     * @param  string  $message
+     * @param  array   $extra
      *
      * @return $this
      */
-    public function flash($message, $type = null, array $options = [])
+    public function info(string $message, array $extra = [])
     {
-        $this->session->flash([
-            $this->getPrefixedName('message') => $message,
-            $this->getPrefixedName('type')    => $type ?: '',
-            $this->getPrefixedName('options') => json_encode($options),
-        ]);
+        return $this->flash($message, 'info', $extra);
+    }
+
+    /**
+     * Flash a success message.
+     *
+     * @param  string  $message
+     * @param  array   $extra
+     *
+     * @return $this
+     */
+    public function success(string $message, array $extra = [])
+    {
+        return $this->flash($message, 'success', $extra);
+    }
+
+    /**
+     * Flash an error message.
+     *
+     * @param  string  $message
+     * @param  array   $extra
+     *
+     * @return $this
+     */
+    public function error(string $message, array $extra = [])
+    {
+        return $this->flash($message, 'danger', $extra);
+    }
+
+    /**
+     * Flash a warning message.
+     *
+     * @param  string  $message
+     * @param  array   $extra
+     *
+     * @return $this
+     */
+    public function warning(string $message, array $extra = [])
+    {
+        return $this->flash($message, 'warning', $extra);
+    }
+
+    /**
+     * Flash a new notification.
+     *
+     * @param  string       $message
+     * @param  string|null  $type
+     * @param  array        $extra
+     *
+     * @return $this
+     */
+    public function flash($message, $type = 'info', array $extra = [])
+    {
+        $this->store()->push(compact('message', 'type', 'extra'));
 
         return $this;
     }
 
-    /* -----------------------------------------------------------------
-     |  Other Methods
-     | -----------------------------------------------------------------
-     */
-
     /**
-     * Prefix the name.
+     * Forget the notification.
      *
-     * @param  string  $name
-     *
-     * @return string
+     * @return void
      */
-    private function getPrefixedName($name)
+    public function forget()
     {
-        return "{$this->sessionPrefix}.$name";
+        $this->store->forget();
     }
 
     /**
-     * Get session value.
+     * Check if it has notifications.
      *
-     * @param  string  $name
-     *
-     * @return mixed
+     * @return bool
      */
-    private function getSession($name)
+    public function isEmpty(): bool
     {
-        return $this->session->get(
-            $this->getPrefixedName($name)
-        );
+        return $this->store()->isEmpty();
+    }
+
+    /**
+     * Check if there is no notifications.
+     *
+     * @return bool
+     */
+    public function isNotEmpty(): bool
+    {
+        return $this->store()->isNotEmpty();
     }
 }
