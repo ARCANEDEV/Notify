@@ -17,7 +17,7 @@ return [
     'stores'  => [
 
         'session' => [
-            'driver'  => Arcanedev\Notify\Stores\SessionStore::class,
+            'class'   => Arcanedev\Notify\Stores\SessionStore::class,
             'options' => [
                 'key' => 'notifications'
             ],

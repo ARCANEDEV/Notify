@@ -22,7 +22,7 @@ class StoreManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return $this->app['config']->get('notify.default', 'session');
+        return $this->config()->get('notify.default', 'session');
     }
 
     /**
@@ -32,17 +32,30 @@ class StoreManager extends Manager
      */
     public function loadStores(): void
     {
-        $stores = $this->config()->get('notify.stores', []);
-
-        foreach ($stores as $driver => $store) {
-            $this->extend($driver, function () use ($store) {
-                return $this->app->make($store['driver']);
-            });
-
-            $this->app->when($store['driver'])
-                      ->needs('$options')
-                      ->give($store['options'] ?? []);
+        foreach ($this->config()->get('notify.stores', []) as $driver => $store) {
+            $this->loadStore($driver, $store);
         }
+    }
+
+    /**
+     * Load/Register a store.
+     *
+     * @param  string  $driver
+     * @param  array   $store
+     *
+     * @return void
+     */
+    protected function loadStore(string $driver, array $store)
+    {
+        $class = $store['class'];
+
+        $this->extend($driver, function () use ($class) {
+            return $this->app->make($class);
+        });
+
+        $this->app->when($class)->needs('$options')->give(function () use ($store) {
+            return $store['options'] ?? [];
+        });
     }
 
     /* -----------------------------------------------------------------
