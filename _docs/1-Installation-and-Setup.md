@@ -17,6 +17,7 @@
 | ![Notify v3.5.x][notify_3_5_x]                                | ![Laravel v5.6][laravel_5_6]                                                                                        |
 | ![Notify v3.6.x][notify_3_6_x]                                | ![Laravel v5.7][laravel_5_7]                                                                                        |
 | ![Notify v3.7.x][notify_3_7_x] ![Notify v4.0.x][notify_4_0_x] | ![Laravel v5.8][laravel_5_8]                                                                                        |
+| ![Notify v5.0.x][notify_5_0_x]                                | ![Laravel v6.0][laravel_6_0]                                                                                        |
 
 [laravel_4_2]:  https://img.shields.io/badge/v4.2-supported-brightgreen.svg?style=flat-square "Laravel v4.2"
 [laravel_5_0]:  https://img.shields.io/badge/v5.0-supported-brightgreen.svg?style=flat-square "Laravel v5.0"
@@ -28,6 +29,7 @@
 [laravel_5_6]:  https://img.shields.io/badge/v5.6-supported-brightgreen.svg?style=flat-square "Laravel v5.6"
 [laravel_5_7]:  https://img.shields.io/badge/v5.7-supported-brightgreen.svg?style=flat-square "Laravel v5.7"
 [laravel_5_8]:  https://img.shields.io/badge/v5.8-supported-brightgreen.svg?style=flat-square "Laravel v5.8"
+[laravel_6_0]:  https://img.shields.io/badge/v6.0-supported-brightgreen.svg?style=flat-square "Laravel v6.0"
 
 [notify_1_x]:   https://img.shields.io/badge/version-1.*-blue.svg?style=flat-square "Notify v1.*"
 [notify_3_2_x]: https://img.shields.io/badge/version-3.2.*-blue.svg?style=flat-square "Notify v3.2.*"
@@ -37,6 +39,7 @@
 [notify_3_6_x]: https://img.shields.io/badge/version-3.6.*-blue.svg?style=flat-square "Notify v3.6.*"
 [notify_3_7_x]: https://img.shields.io/badge/version-3.7.*-blue.svg?style=flat-square "Notify v3.7.*"
 [notify_4_0_x]: https://img.shields.io/badge/version-4.0.*-blue.svg?style=flat-square "Notify v4.0.*"
+[notify_5_0_x]: https://img.shields.io/badge/version-5.0.*-blue.svg?style=flat-square "Notify v5.0.*"
 
 ## Composer
 
