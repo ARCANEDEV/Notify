@@ -1,6 +1,8 @@
 <?php namespace Arcanedev\Notify;
 
-use Arcanedev\Support\PackageServiceProvider as ServiceProvider;
+use Arcanedev\Notify\Contracts\StoreManager as StoreManagerContract;
+use Arcanedev\Support\Providers\PackageServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
 /**
  * Class     NotifyServiceProvider
@@ -8,7 +10,7 @@ use Arcanedev\Support\PackageServiceProvider as ServiceProvider;
  * @package  Arcanedev\Notify
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class NotifyServiceProvider extends ServiceProvider
+class NotifyServiceProvider extends PackageServiceProvider implements DeferrableProvider
 {
     /* -----------------------------------------------------------------
      |  Properties
@@ -22,13 +24,6 @@ class NotifyServiceProvider extends ServiceProvider
      */
     protected $package = 'notify';
 
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
@@ -37,32 +32,35 @@ class NotifyServiceProvider extends ServiceProvider
     /**
      * Register the service provider.
      */
-    public function register()
+    public function register(): void
     {
         parent::register();
 
         $this->registerConfig();
 
-        $this->singleton(StoreManager::class, function ($app) {
-            return tap(new StoreManager($app), function (StoreManager $manager) {
-                $manager->loadStores();
-            });
+        // Store Manager
+        $this->singleton(StoreManagerContract::class, StoreManager::class);
+
+        $this->app->extend(StoreManagerContract::class, function (StoreManagerContract $manager, $app) {
+            return $manager->registerStores(
+                $app['config']->get('notify.stores', [])
+            );
         });
 
+        // Store driver
         $this->bind(Contracts\Store::class, function ($app) {
-            return $app[StoreManager::class]->driver();
+            return $app[StoreManagerContract::class]->driver();
         });
 
+        // Notifier
         $this->singleton(Contracts\Notify::class, Notify::class);
     }
 
     /**
      * Boot the package.
      */
-    public function boot()
+    public function boot(): void
     {
-        parent::boot();
-
         $this->publishConfig();
     }
 
@@ -71,7 +69,7 @@ class NotifyServiceProvider extends ServiceProvider
      *
      * @return array
      */
-    public function provides()
+    public function provides(): array
     {
         return [
             Contracts\Notify::class,

@@ -161,8 +161,6 @@ class Notify implements NotifyContract
 
     /**
      * Forget the notification.
-     *
-     * @return void
      */
     public function forget()
     {
