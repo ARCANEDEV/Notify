@@ -21,7 +21,7 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/Notify/releas
   * Easy setup &amp; configuration.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
-  * Laravel `4.2 | 5.x | 6.0` are supported.
+  * Laravel `4.2 | 5.x | 6.x` are supported.
   * Made with :heart: &amp; :coffee:.
 
 ## Table of contents
@@ -44,7 +44,7 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 - [All Contributors][link-contributors]
 
 [badge_license]:   http://img.shields.io/packagist/l/arcanedev/notify.svg?style=flat-square
-[badge_laravel]:   https://img.shields.io/badge/Laravel-4.2|5.x|6.0-orange.svg?style=flat-square
+[badge_laravel]:   https://img.shields.io/badge/Laravel-4.2|5.x|6.x-orange.svg?style=flat-square
 [badge_build]:     http://img.shields.io/travis/ARCANEDEV/Notify.svg?style=flat-square
 [badge_coverage]:  https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/Notify.svg?style=flat-square
 [badge_quality]:   https://img.shields.io/scrutinizer/g/ARCANEDEV/Notify.svg?style=flat-square

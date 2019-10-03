@@ -6,8 +6,6 @@
   2. [Configuration](2-Configuration.md)
   3. [Usage](3-Usage.md)
 
-> **NOTE:** This documentation is for `v4.0` (master branch), switch the branch if you're using an older version.
-
 #### Basic Usage
 
 From your application, call the flash method with a message and type.
