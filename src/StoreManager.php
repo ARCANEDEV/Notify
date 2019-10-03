@@ -1,6 +1,7 @@
 <?php namespace Arcanedev\Notify;
 
 use Illuminate\Support\Manager;
+use Arcanedev\Notify\Contracts\StoreManager as StoreManagerContract;
 
 /**
  * Class     StoreManager
@@ -8,7 +9,7 @@ use Illuminate\Support\Manager;
  * @package  Arcanedev\Notify
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class StoreManager extends Manager
+class StoreManager extends Manager implements StoreManagerContract
 {
     /* -----------------------------------------------------------------
      |  Main Methods
@@ -20,56 +21,41 @@ class StoreManager extends Manager
      *
      * @return string
      */
-    public function getDefaultDriver()
+    public function getDefaultDriver(): string
     {
-        return $this->config()->get('notify.default', 'session');
+        return $this->config->get('notify.default', 'session');
     }
 
     /**
-     * Load the stores.
+     * Register multiple stores.
      *
-     * @return void
+     * @param  array  $stores
+     *
+     * @return $this
      */
-    public function loadStores(): void
+    public function registerStores(array $stores): StoreManagerContract
     {
-        foreach ($this->config()->get('notify.stores', []) as $driver => $store) {
-            $this->loadStore($driver, $store);
+        foreach ($stores as $driver => $store) {
+            $this->registerStore($driver, $store);
         }
+
+        return $this;
     }
 
     /**
-     * Load/Register a store.
+     * Register a store.
      *
      * @param  string  $driver
      * @param  array   $store
      *
-     * @return void
+     * @return self
      */
-    protected function loadStore(string $driver, array $store)
+    public function registerStore(string $driver, array $store): StoreManagerContract
     {
-        $class = $store['class'];
-
-        $this->extend($driver, function () use ($class) {
-            return $this->app->make($class);
+        return $this->extend($driver, function () use ($store) {
+            return $this->container->make($store['class'], [
+                'options' => $store['options'] ?? [],
+            ]);
         });
-
-        $this->app->when($class)->needs('$options')->give(function () use ($store) {
-            return $store['options'] ?? [];
-        });
-    }
-
-    /* -----------------------------------------------------------------
-     |  Other Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Get the config repository.
-     *
-     * @return \Illuminate\Contracts\Config\Repository
-     */
-    protected function config()
-    {
-        return $this->app['config'];
     }
 }

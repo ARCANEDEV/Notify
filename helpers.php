@@ -12,7 +12,7 @@ if ( ! function_exists('notify')) {
      *
      * @return \Arcanedev\Notify\Contracts\Notify
      */
-    function notify($message = null, $type = 'info', array $extra = [])
+    function notify($message = null, $type = 'info', array $extra = []): Notify
     {
         /** @var  Arcanedev\Notify\Contracts\Notify  $notifier */
         $notifier = app(Notify::class);

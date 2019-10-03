@@ -16,12 +16,12 @@
     "require": {
         "php":               ">=7.2.0",
         "ext-json":          "*",
-        "arcanedev/support": "~5.0.0"
+        "arcanedev/support": "^5.0"
     },
     "require-dev": {
-        "orchestra/testbench": "~4.0.0",
-        "phpunit/phpcov":      "~6.0",
-        "phpunit/phpunit":     "~8.0"
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpcov":      "^6.0",
+        "phpunit/phpunit":     "^8.0"
     },
     "autoload": {
         "psr-4": {
