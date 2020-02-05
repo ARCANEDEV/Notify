@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Notify\Contracts;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Notify\Contracts;
 
 /**
  * Interface     StoreManager

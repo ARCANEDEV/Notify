@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Notify\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Notify\Tests;
 
 use Illuminate\Support\Collection;
 
@@ -16,7 +20,7 @@ class HelperTest extends TestCase
      */
 
     /** @test */
-    public function it_can_get_notify_instance()
+    public function it_can_get_notify_instance(): void
     {
         $notify = notify();
 
@@ -34,7 +38,7 @@ class HelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_flash_a_notification_with_only_message()
+    public function it_can_flash_a_notification_with_only_message(): void
     {
         notify('Welcome Aboard');
 
@@ -70,7 +74,7 @@ class HelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_flash_a_notification_with_message_and_type()
+    public function it_can_flash_a_notification_with_message_and_type(): void
     {
         notify("You've got an error!", 'danger');
 
@@ -106,7 +110,7 @@ class HelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_flash_notification_with_extra_options()
+    public function it_can_flash_notification_with_extra_options(): void
     {
         notify()->flash('Welcome Aboard', 'success', [
             'content' => '<p>It is nice to see you again!</p>',
@@ -134,7 +138,7 @@ class HelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_forget_all_the_notifications()
+    public function it_can_forget_all_the_notifications(): void
     {
         notify()->flash('Welcome Aboard');
 
@@ -149,7 +153,7 @@ class HelperTest extends TestCase
     }
 
     /** @test */
-    public function it_can_flash_with_predefined_types()
+    public function it_can_flash_with_predefined_types(): void
     {
         notify()->info('Info notification', ['icon' => 'info-icon']);
         notify()->success('Success notification', ['icon' => 'success-icon']);

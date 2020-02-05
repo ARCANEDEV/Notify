@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Arcanedev\Notify\Contracts\Notify;
 
 if ( ! function_exists('notify')) {
@@ -12,11 +14,15 @@ if ( ! function_exists('notify')) {
      *
      * @return \Arcanedev\Notify\Contracts\Notify
      */
-    function notify($message = null, $type = 'info', array $extra = []): Notify
+    function notify(string $message = null, string $type = 'info', array $extra = []): Notify
     {
         /** @var  Arcanedev\Notify\Contracts\Notify  $notifier */
         $notifier = app(Notify::class);
 
-        return is_null($message) ? $notifier : $notifier->flash($message, $type, $extra);
+        if (is_null($message)) {
+            return $notifier;
+        }
+
+        return $notifier->flash($message, $type, $extra);
     }
 }

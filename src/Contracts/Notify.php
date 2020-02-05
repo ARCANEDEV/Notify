@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Notify\Contracts;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Notify\Contracts;
 
 use Illuminate\Support\Collection;
 
@@ -27,7 +31,7 @@ interface Notify
      *
      * @param  \Arcanedev\Notify\Contracts\Store  $store
      *
-     * @return \Arcanedev\Notify\Notify
+     * @return $this
      */
     public function setStore(Store $store);
 
@@ -49,7 +53,7 @@ interface Notify
      * @param  string  $message
      * @param  array   $extra
      *
-     * @return \Arcanedev\Notify\Notify
+     * @return $this
      */
     public function info(string $message, array $extra = []);
 

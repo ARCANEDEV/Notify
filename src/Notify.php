@@ -1,7 +1,11 @@
-<?php namespace Arcanedev\Notify;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Notify;
 
 use Arcanedev\Notify\Contracts\Notify as NotifyContract;
-use Arcanedev\Notify\Contracts\Store;
+use Arcanedev\Notify\Contracts\Store as StoreContract;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
 
@@ -42,7 +46,7 @@ class Notify implements NotifyContract
      *
      * @param  \Arcanedev\Notify\Contracts\Store  $store
      */
-    public function __construct(Store $store)
+    public function __construct(StoreContract $store)
     {
         $this->setStore($store);
     }
@@ -57,7 +61,7 @@ class Notify implements NotifyContract
      *
      * @return \Arcanedev\Notify\Contracts\Store
      */
-    public function store(): Store
+    public function store(): StoreContract
     {
         return $this->store;
     }
@@ -69,7 +73,7 @@ class Notify implements NotifyContract
      *
      * @return $this
      */
-    public function setStore(Store $store)
+    public function setStore(StoreContract $store)
     {
         $this->store = $store;
 
@@ -162,7 +166,7 @@ class Notify implements NotifyContract
     /**
      * Forget the notification.
      */
-    public function forget()
+    public function forget(): void
     {
         $this->store->forget();
     }

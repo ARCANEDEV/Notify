@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Notify;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Notify;
 
 use Arcanedev\Notify\Contracts\StoreManager as StoreManagerContract;
 use Arcanedev\Support\Providers\PackageServiceProvider;
@@ -41,10 +45,10 @@ class NotifyServiceProvider extends PackageServiceProvider implements Deferrable
         // Store Manager
         $this->singleton(StoreManagerContract::class, StoreManager::class);
 
-        $this->app->extend(StoreManagerContract::class, function (StoreManagerContract $manager, $app) {
-            return $manager->registerStores(
-                $app['config']->get('notify.stores', [])
-            );
+        $this->app->resolving(StoreManagerContract::class, function (StoreManagerContract $manager, $app) {
+            $stores = $app['config']->get('notify.stores', []);
+
+            return $manager->registerStores($stores);
         });
 
         // Store driver
@@ -73,6 +77,7 @@ class NotifyServiceProvider extends PackageServiceProvider implements Deferrable
     {
         return [
             Contracts\Notify::class,
+            Contracts\Store::class,
         ];
     }
 }
