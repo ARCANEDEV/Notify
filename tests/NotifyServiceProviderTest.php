@@ -43,7 +43,7 @@ class NotifyServiceProviderTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated()
+    public function it_can_be_instantiated(): void
     {
         $expectations = [
             \Illuminate\Support\ServiceProvider::class,
@@ -59,10 +59,11 @@ class NotifyServiceProviderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_provides()
+    public function it_can_provides(): void
     {
         $expected = [
             \Arcanedev\Notify\Contracts\Notify::class,
+            \Arcanedev\Notify\Contracts\Store::class,
         ];
 
         static::assertEquals($expected, $this->provider->provides());

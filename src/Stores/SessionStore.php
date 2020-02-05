@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Notify\Stores;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Notify\Stores;
 
 use Arcanedev\Notify\Contracts\Store;
 use Illuminate\Contracts\Session\Session as SessionContract;
@@ -95,10 +99,8 @@ class SessionStore implements Store
 
     /**
      * Forget the notifications.
-     *
-     * @return void
      */
-    public function forget()
+    public function forget(): void
     {
         $this->session->forget($this->getSessionKey());
     }

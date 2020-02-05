@@ -1,7 +1,11 @@
-<?php namespace Arcanedev\Notify;
+<?php
 
-use Illuminate\Support\Manager;
+declare(strict_types=1);
+
+namespace Arcanedev\Notify;
+
 use Arcanedev\Notify\Contracts\StoreManager as StoreManagerContract;
+use Illuminate\Support\Manager;
 
 /**
  * Class     StoreManager

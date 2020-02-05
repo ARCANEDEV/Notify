@@ -1,4 +1,8 @@
-<?php namespace Arcanedev\Notify\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Notify\Tests;
 
 use Arcanedev\Notify\Contracts\Store;
 use Arcanedev\Notify\Notify;
@@ -17,7 +21,7 @@ class NotifyTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    /** @var Notify */
+    /** @var  \Arcanedev\Notify\Notify */
     private $notify;
 
     /* -----------------------------------------------------------------
@@ -29,7 +33,7 @@ class NotifyTest extends TestCase
     {
         parent::setUp();
 
-        $this->notify  = new Notify($this->app->make(Store::class));
+        $this->notify = new Notify($this->app->make(Store::class));
     }
 
     /* -----------------------------------------------------------------
@@ -38,10 +42,8 @@ class NotifyTest extends TestCase
      */
 
     /** @test */
-    public function it_can_be_instantiated_via_the_contract()
+    public function it_can_be_instantiated(): void
     {
-        $this->notify = $this->app->make(\Arcanedev\Notify\Contracts\Notify::class);
-
         $expectations = [
             \Arcanedev\Notify\Contracts\Notify::class,
             \Arcanedev\Notify\Notify::class,
@@ -56,7 +58,15 @@ class NotifyTest extends TestCase
     }
 
     /** @test */
-    public function it_can_flash_a_notification_with_only_message()
+    public function it_can_be_instantiated_via_the_contract(): void
+    {
+        $this->notify = $this->app->make(\Arcanedev\Notify\Contracts\Notify::class);
+
+        $this->it_can_be_instantiated();
+    }
+
+    /** @test */
+    public function it_can_flash_a_notification_with_only_message(): void
     {
         $this->notify->flash('Welcome Aboard');
 
@@ -79,7 +89,7 @@ class NotifyTest extends TestCase
     }
 
     /** @test */
-    public function it_can_flash_notification_with_type()
+    public function it_can_flash_notification_with_type(): void
     {
         $this->notify->flash('Welcome Aboard', 'success');
 
@@ -102,7 +112,7 @@ class NotifyTest extends TestCase
     }
 
     /** @test */
-    public function it_can_flash_notification_with_extra_options()
+    public function it_can_flash_notification_with_extra_options(): void
     {
         $this->notify->flash('Welcome Aboard', 'success', [
             'content' => '<p>It is nice to see you again!</p>',
@@ -131,7 +141,7 @@ class NotifyTest extends TestCase
     }
 
     /** @test */
-    public function it_can_forget_all_the_notifications()
+    public function it_can_forget_all_the_notifications(): void
     {
         $this->notify->flash('Welcome Aboard');
 
@@ -146,7 +156,7 @@ class NotifyTest extends TestCase
     }
 
     /** @test */
-    public function it_can_flash_with_predefined_types()
+    public function it_can_flash_with_predefined_types(): void
     {
         $this->notify->info('Info notification', ['icon' => 'info-icon']);
         $this->notify->success('Success notification', ['icon' => 'success-icon']);

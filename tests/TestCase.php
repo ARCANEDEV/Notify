@@ -1,8 +1,10 @@
-<?php namespace Arcanedev\Notify\Tests;
+<?php
 
-use Arcanedev\Notify\Contracts\Store;
+declare(strict_types=1);
+
+namespace Arcanedev\Notify\Tests;
+
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Prophecy\Prophecy\ObjectProphecy;
 
 /**
  * Class     TestCase
@@ -24,7 +26,7 @@ abstract class TestCase extends BaseTestCase
      */
     protected $sessionPrefix;
 
-    /** @var Store|ObjectProphecy */
+    /** @var \Arcanedev\Notify\Contracts\Store|\Prophecy\Prophecy\ObjectProphecy */
     protected $session;
 
     /* -----------------------------------------------------------------
@@ -48,7 +50,7 @@ abstract class TestCase extends BaseTestCase
      *
      * @return array
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             \Arcanedev\Notify\NotifyServiceProvider::class,
