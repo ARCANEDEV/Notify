@@ -65,7 +65,9 @@ class NotifyServiceProvider extends PackageServiceProvider implements Deferrable
      */
     public function boot(): void
     {
-        $this->publishConfig();
+        if ($this->app->runningInConsole()) {
+            $this->publishConfig();
+        }
     }
 
     /**
