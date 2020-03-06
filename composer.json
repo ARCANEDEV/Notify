@@ -14,13 +14,12 @@
     "type":    "library",
     "license": "MIT",
     "require": {
-        "php":               ">=7.2.0",
+        "php":               "^7.2.0",
         "ext-json":          "*",
         "arcanedev/support": "^5.1"
     },
     "require-dev": {
         "orchestra/testbench": "^4.0",
-        "phpunit/phpcov":      "^6.0",
         "phpunit/phpunit":     "^8.0"
     },
     "autoload": {
@@ -40,5 +39,7 @@
                 "Arcanedev\\Notify\\NotifyServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
