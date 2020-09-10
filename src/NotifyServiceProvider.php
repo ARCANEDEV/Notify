@@ -11,7 +11,6 @@ use Illuminate\Contracts\Support\DeferrableProvider;
 /**
  * Class     NotifyServiceProvider
  *
- * @package  Arcanedev\Notify
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class NotifyServiceProvider extends PackageServiceProvider implements DeferrableProvider

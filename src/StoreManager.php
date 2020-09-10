@@ -10,7 +10,6 @@ use Illuminate\Support\Manager;
 /**
  * Class     StoreManager
  *
- * @package  Arcanedev\Notify
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class StoreManager extends Manager implements StoreManagerContract

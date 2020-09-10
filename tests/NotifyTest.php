@@ -11,7 +11,6 @@ use Illuminate\Support\Collection;
 /**
  * Class     NotifyTest
  *
- * @package  Arcanedev\Notify\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class NotifyTest extends TestCase
