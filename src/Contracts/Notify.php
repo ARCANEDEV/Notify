@@ -9,7 +9,6 @@ use Illuminate\Support\Collection;
 /**
  * Interface  Notify
  *
- * @package   Arcanedev\Notify\Contracts
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 interface Notify

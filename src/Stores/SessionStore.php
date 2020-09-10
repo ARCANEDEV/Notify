@@ -9,9 +9,8 @@ use Illuminate\Contracts\Session\Session as SessionContract;
 use Illuminate\Support\Collection;
 
 /**
- * Class     Session
+ * Class     SessionStore
  *
- * @package  Arcanedev\Notify
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class SessionStore implements Store

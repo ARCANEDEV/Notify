@@ -7,10 +7,9 @@ namespace Arcanedev\Notify\Contracts;
 use Illuminate\Support\Collection;
 
 /**
- * Interface     Store
+ * Interface  Store
  *
- * @package  Arcanedev\Notify\Contracts
- * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 interface Store
 {

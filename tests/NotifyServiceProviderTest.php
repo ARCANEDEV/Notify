@@ -1,11 +1,14 @@
-<?php namespace Arcanedev\Notify\Tests;
+<?php
+
+declare(strict_types=1);
+
+namespace Arcanedev\Notify\Tests;
 
 use Arcanedev\Notify\NotifyServiceProvider;
 
 /**
  * Class     NotifyServiceProviderTest
  *
- * @package  Arcanedev\Notify\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class NotifyServiceProviderTest extends TestCase

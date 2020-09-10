@@ -9,7 +9,6 @@ use Illuminate\Support\Collection;
 /**
  * Class     HelperTest
  *
- * @package  Arcanedev\Notify\Tests\Laravel
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class HelperTest extends TestCase

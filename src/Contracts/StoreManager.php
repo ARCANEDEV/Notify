@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Arcanedev\Notify\Contracts;
 
 /**
- * Interface     StoreManager
+ * Interface  StoreManager
  *
- * @package  Arcanedev\Notify\Contracts
- * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 interface StoreManager
 {

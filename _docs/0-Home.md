@@ -7,7 +7,7 @@ Flexible flash notifications helper for Laravel.
   * Easy setup &amp; configuration.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
-  * Laravel `4.2` to `7.x` are supported.
+  * Laravel `4.2` to `8.x` are supported.
   * Made with :heart: &amp; :coffee:.
 
 ## Table of contents

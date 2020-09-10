@@ -12,7 +12,6 @@ use Illuminate\Support\Traits\Macroable;
 /**
  * Class     Notify
  *
- * @package  Arcanedev\Notify
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class Notify implements NotifyContract
